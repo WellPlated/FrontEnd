@@ -1,22 +1,21 @@
-import logo from "../logo.svg";
-import "../css/Login.css";
+import "../css/Profile.css";
 
-function Login() {
+function Profile() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>THIS IS THE LOGIN PAGE</p>
+        <p>THIS IS THE PROFILE PAGE</p>
         <a
           className="App-link"
           href="/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Login
+          Profile
         </a>
       </header>
     </div>
   );
 }
 
-export default Login;
+export default Profile;

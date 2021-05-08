@@ -3,25 +3,27 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Components
-import App from './views/App';
+import Home from './views/Home';
 import Login from './views/Login.js'
+import Profile from "./views/Profile.js";
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={hist}>
+  <Router history={hist} onUpdate={() => window.scrollTo(0, 0)}>
+    <div className="main-container">
       <Switch>
+        <Route path="/Profile" component={Profile} />
         <Route path="/Login" component={Login} />
-        <Route path="/" component={App} />
+        <Route path="/" component={Home} />
       </Switch>
-      
-      <App />
-
+    </div>
+    <Home />
   </Router>,
 
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
