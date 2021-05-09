@@ -5,9 +5,9 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserHistory } from "history";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Components
-import Home from './views/Home';
-import Login from './views/Login.js'
-import Profile from "./views/Profile.js";
+import Home from './views/Home/Home.js';
+import Login from './views/Login/Login'
+import Profile from "./views/Profile/Profile";
 
 var hist = createBrowserHistory();
 

@@ -1,8 +1,9 @@
-import '../css/Home.css';
+import '../../css/Home.css';
 // @material-ui components
 import Grid from "@material-ui/core/Grid";
 // Components
-import SideNav from "./SideNav.js";
+import SideNav from "../SideNav/SideNav.js";
+
 
 function Home(props) {
   return (
