@@ -8,11 +8,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './views/Home/Home.js';
 import Login from './views/Login/Login'
 import Profile from "./views/Profile/Profile";
+import SideNav from "./views/SideNav/SideNav";
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist} onUpdate={() => window.scrollTo(0, 0)}>
+    <SideNav name="Test" />
     <div className="main-container">
       <Switch>
         <Route path="/Profile" component={Profile} />
@@ -20,7 +22,6 @@ ReactDOM.render(
         <Route path="/" component={Home} />
       </Switch>
     </div>
-    <Home />
   </Router>,
 
   document.getElementById("root")
