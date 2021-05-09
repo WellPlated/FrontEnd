@@ -1,4 +1,6 @@
 import '../css/Home.css';
+// @material-ui components
+import Grid from "@material-ui/core/Grid";
 // Components
 import SideNav from "./SideNav.js";
 
@@ -7,10 +9,10 @@ function Home(props) {
     <div className="Home">
       <header className="Home-header">
         <SideNav name="Test" />
-        <p>
-          Home
-        </p>
-        
+        <h1>Our Kitchen Cache</h1>
+        <Grid container spacing={3}>
+          <Grid item>Item</Grid>
+        </Grid>
       </header>
     </div>
   );
