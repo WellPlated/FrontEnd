@@ -1,5 +1,6 @@
 import { SettingsSystemDaydreamTwoTone } from '@material-ui/icons';
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function LoginForm({ Login, error }) {
     const [details, setDetails] = useState({name: "", password: ""});
@@ -7,7 +8,23 @@ function LoginForm({ Login, error }) {
     const submitHandler = e => {
         e.preventDefault();
 
-        Login(details);
+        axios.post('http://127.0.0.1:5000/login', {
+            username : details.name,
+            password : details.password
+        })
+            .then(function(response){
+                console.log(response);
+                if (response['data']['status'] === 200) {
+                    Login(details);
+                }
+                else if (response['data']['status'] === 403) {
+                    error("Wrong Password!!")
+                }
+        })
+        .catch(function(error){
+            console.log(error);
+       //Perform action based on error
+        });
     }
 
     return (

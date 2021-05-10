@@ -8,22 +8,31 @@ function Login() {
   const [error, setError] = useState("");
 
   const Login = details => {
-    console.log(details);
+    setUser(details);
+    console.log(user);
   }
 
   const Logout = () => {
+    setUser({name: "", password: ""});
     console.log("logout");
+  }
+
+  const Error = message => {
+    setError(message);
   }
 
   return (
     <div className="App">
-      { (user.name != "") ? (
+      { (user.name !== "") ? (
         <div className="welcome">
           <h2>Welcome, <span>{user.name}</span></h2>
-          <button>Logout</button>
+          <button onClick={Logout}>Logout</button>
           </div>
       ) : (
-      <LoginForm Login={Login} error={error}/>
+      <div>
+        <LoginForm Login={Login} error={Error}/>
+        <div>{error}</div>
+      </div>
       )} 
     </div>
   );
