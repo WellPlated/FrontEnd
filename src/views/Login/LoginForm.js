@@ -18,7 +18,7 @@ function LoginForm({ Login, error }) {
                     Login(details);
                 }
                 else if (response['data']['status'] === 403) {
-                    error("Wrong Password!!")
+                    error(response['data']['message'])
                 }
         })
         .catch(function(error){
