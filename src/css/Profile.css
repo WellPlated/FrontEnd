@@ -1,6 +1,6 @@
 .Profile {
     text-align: center;
-    margin-left: 170px;
+    margin-left: 15%;
   }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -10,31 +10,50 @@
 }
 
 .Profile-header {
-  background-color:#ffbe24ff ;
+  background-color:#ffffff ;
   min-height: 9vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  font-family: 'Courier New', Courier, monospace;
   color:  #bc5a45;
-  background-image: linear-gradient(to bottom, #ffbe24ff,#fadd6a);
   
+}
+.headerPage {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: bold;
+  color: #bc5a45;
+  font-size: 45px;
+}
+.headerProfilePage {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: bold;
+  color: #bc5a45;
+  font-size: 30px;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 .Profile-divider{
-  color:  #bc5a45;
+  
+  width: 3px;
+  background-color: #bc5a45;
 }
 
 .Profile-content-background{
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
  
 }
 .Profile-content{
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
-  
+  padding-left: 5%;
+  padding-right: 5%;
   font-size: calc(10px + 2vmin);
   color:  #f18973;
 }

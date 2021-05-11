@@ -11,11 +11,13 @@ function Home(props) {
     <div className="Home">
       <header className="Home-header">
         <h1>Our Kitchen Cache</h1>
-        <RecipeCard />
-        <Grid container spacing={3}>
-          <Grid item>Item</Grid>
-          
-        </Grid>
+
+          <div className="recipeCache">
+            <Grid container spacing={3}>
+              <Grid item><RecipeCard /></Grid>
+              <Grid item><RecipeCard /></Grid>
+            </Grid>
+          </div>
       </header>
     </div>
   );
