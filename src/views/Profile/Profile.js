@@ -1,21 +1,64 @@
 import "../../css/Profile.css";
+import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import Divider from "@material-ui/core/Divider";
+import RecipeCard from "../Components/Recipe";
+import { makeStyles } from '@material-ui/core/styles';
+
+const name = "John Doe";//Filler for now
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 280,
+  },
+}));//Modify RecipeCard size for making display better
 
 function Profile() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>THIS IS THE PROFILE PAGE</p>
-        <a
-          className="App-link"
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Profile
-        </a>
+    <div className="Profile">
+      <header className="Profile-header">
+        <Grid container direction="row" justify='center' spacing={1}>
+        <Grid item xs={1}></Grid>
+          <Grid item xs={9}>
+            <b>{name}</b>
+          </Grid>
+          <Grid item xs={1}>
+            <Avatar></Avatar>
+          </Grid>
+        </Grid>
       </header>
-    </div>
-  );
+      
+      <header className="Profile-content-background">
+        <header className="Profile-content">
+          
+      <Grid container direction="row" spacing={1}>
+      
+        <Grid item xs={5}>
+          <div>My Recipes</div>
+          <Grid container direction="row" justify="center" spacing={1}>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+          </Grid>
+        </Grid>
+        
+        <Divider orientation="vertical" justify="center" class="Profile-divider" flexItem/>
+        <Grid item xs={5}>
+          <div>Liked Recipes</div>
+          <Grid container direction="row" justify="center" spacing={1}>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+            <Grid item className={classes.root} ><RecipeCard /></Grid>
+          </Grid>
+        </Grid>
+
+      </Grid>
+
+      </header>
+      </header> 
+    </div>);
 }
 
 export default Profile;
