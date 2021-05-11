@@ -8,7 +8,10 @@ function Login() {
   const [error, setError] = useState("");
 
   const Login = details => {
-    setUser(details);
+    setUser({
+      name: details.name,
+      email: details.email
+  });
     console.log(user);
   }
 
