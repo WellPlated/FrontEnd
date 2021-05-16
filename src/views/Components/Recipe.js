@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from "prop-types";
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -15,7 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+//img
 import testImage from "../../img/shrimp-paella.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeCard() {
+export default function RecipeCard(props) {
   const classes = useStyles();
 
   return (
@@ -49,7 +50,7 @@ export default function RecipeCard() {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            {props.user_id}
           </Avatar>
         }
         action={
@@ -57,18 +58,17 @@ export default function RecipeCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={props.name}
+        subheader={props.date}
       />
       <CardMedia
         className={classes.media}
-        image={testImage}
-        title="Paella dish"
+        // image={props.image}
+        title={props.description}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -78,8 +78,18 @@ export default function RecipeCard() {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        
       </CardActions>
     </Card>
   );
 }
+
+RecipeCard.propTypes = {
+  date: PropTypes.string,
+  description: PropTypes.string,
+  id: PropTypes.number,
+  ingredients: PropTypes.string,
+  name: PropTypes.string,
+  recipe: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
+  user_id: PropTypes.number
+};

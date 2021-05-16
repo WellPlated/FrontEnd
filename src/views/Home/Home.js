@@ -3,18 +3,17 @@ import '../../css/Home.css';
 import Grid from "@material-ui/core/Grid";
 // Components
 import SideNav from "../SideNav/SideNav.js";
-import RecipeCard from "../Components/Recipe";
-
+import Recipes from "../Components/Recipes.js";
 
 function Home(props) {
   return (
     <div className="Home">
       <header className="Home-header">
-        <h1>Our Kitchen Cache</h1>
-        <RecipeCard />
-        <Grid container spacing={3}>
-          <Grid item>Item</Grid>
-          
+        <Grid container spacing={5}>
+          <Grid item xs={12}>
+            <h1>Our Kitchen Cache</h1>
+          </Grid>
+          <Recipes />
         </Grid>
       </header>
     </div>
