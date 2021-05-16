@@ -61,3 +61,7 @@
 .Profile-link {
   color: #61dafb;
 }
+
+.not-logged-in {
+  padding: 200px;
+}

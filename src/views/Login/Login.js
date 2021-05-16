@@ -1,5 +1,5 @@
 import '../../css/Login.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from './LoginForm';
 
 function Login() {
@@ -13,10 +13,12 @@ function Login() {
       email: details.email
   });
     console.log(user);
+    localStorage.setItem("username", details.name);
   }
 
   const Logout = () => {
     setUser({name: "", password: ""});
+    localStorage.clear();
     console.log("logout");
   }
 
@@ -26,15 +28,15 @@ function Login() {
 
   return (
     <div className="App">
-      { (user.name !== "") ? (
+      { ("username" in localStorage) ? (
         <div className="welcome">
-          <h2>Welcome, <span>{user.name}</span></h2>
+          <h2>Welcome, <span>{localStorage.getItem("username")}</span></h2>
           <button onClick={Logout}>Logout</button>
           </div>
       ) : (
       <div>
         <LoginForm Login={Login} error={Error}/>
-        <div>{error}</div>
+        <div className="error">{error}</div>
       </div>
       )} 
     </div>

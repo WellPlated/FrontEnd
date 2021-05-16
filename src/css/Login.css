@@ -117,3 +117,7 @@ form .form-inner input[type="submit"]:hover {
   color: #FE4800;
   font-weight: 700;
 }
+
+.error {
+  padding: 20px;
+}
