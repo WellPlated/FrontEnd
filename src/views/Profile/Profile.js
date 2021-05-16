@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-const name = "John Doe";//Filler for now
+const name = localStorage.getItem("username");//Filler for now
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 200,
@@ -58,7 +58,7 @@ function Profile() {
     getMyRecipes();
 
   }, [] ) // need useEffect so that data isn't fetched after each re-render
-  
+
   console.log(myrecipes)
 
   const classes = useStyles();
