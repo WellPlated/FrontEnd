@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../../css/SignUp.css';
 
 function SignUpForm({ SignUp, error }) {
-    const [details, setDetails] = useState({name: "", password: ""});
+    const [details, setDetails] = useState({email: "", name: "", password: ""});
 
     const submitHandler = e => {
         e.preventDefault();
@@ -33,6 +33,11 @@ function SignUpForm({ SignUp, error }) {
             <div className="form-inner">
                 <h2>Enter information</h2>
                 { /* Error */}
+                <div className="form-group">
+                    <label htmlFor="email">Email: </label>
+                    <input type="text" name="email" id="email" 
+                    onChange={e => setDetails({...details, name: e.target.value})} value={details.email}/>
+                </div>
                 <div className="form-group">
                     <label htmlFor="name">Username: </label>
                     <input type="text" name="name" id="name" 

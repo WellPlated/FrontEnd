@@ -4,11 +4,12 @@ import SignUpForm from './SignUpForm';
 
 function SignUp() {
 
-  const [user, setUser] = useState({name: "", password: ""});
+  const [user, setUser] = useState({email: "", name: "", password: ""});
   const [error, setError] = useState("");
 
   const SignUp = details => {
     setUser({
+      email: details.email,
       name: details.name,
       password: details.password
   });
