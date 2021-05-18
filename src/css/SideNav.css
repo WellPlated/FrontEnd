@@ -5,11 +5,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-<<<<<<< HEAD
-  background-color: #f18973;
-=======
   background-color: #ffa2a7;
->>>>>>> 0b2de7ffb48ddaa51ba2a7f37bd81f0d5cb2d128
   transition: 0.5s ease;
   overflow-x: hidden;
   display: flex;
