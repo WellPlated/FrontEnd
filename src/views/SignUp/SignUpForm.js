@@ -1,9 +1,9 @@
 import { SettingsInputSvideoRounded, SettingsSystemDaydreamTwoTone } from '@material-ui/icons';
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../../css/Login.css';
+import '../../css/SignUp.css';
 
-function LoginForm({ Login, error }) {
+function SignUpForm({ SignUp, error }) {
     const [details, setDetails] = useState({name: "", password: ""});
 
     const submitHandler = e => {
@@ -16,9 +16,7 @@ function LoginForm({ Login, error }) {
             .then(function(response){
                 console.log(response);
                 if (response['data']['status'] === 200) {
-                    Login(details);
-                    localStorage.setItem("token", response['data']['access_token'])
-                    console.log(localStorage.getItem("token"))
+                    SignUp(details);
                 }
                 else if (response['data']['status'] === 403) {
                     error(response['data']['message'])
@@ -33,7 +31,7 @@ function LoginForm({ Login, error }) {
     return (
         <form onSubmit={submitHandler}>
             <div className="form-inner">
-                <h2>Welcome!</h2>
+                <h2>Enter information</h2>
                 { /* Error */}
                 <div className="form-group">
                     <label htmlFor="name">Username: </label>
@@ -45,12 +43,10 @@ function LoginForm({ Login, error }) {
                     <input type="password" name="password" id="password" 
                     onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
                 </div>
-                <input type="submit" value="LOGIN" />
-                <h4> Don't have an account? </h4>
-                <a href="/SignUp">Sign Up</a>
+                <input type="submit" value="SIGN UP" />
             </div>
         </form>
     )
 }
 
-export default LoginForm;
+export default SignUpForm;

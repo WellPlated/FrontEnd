@@ -1,6 +1,7 @@
 import '../../css/Login.css';
 import React, { useState, useEffect } from 'react';
 import LoginForm from './LoginForm';
+import { useHistory } from 'react-router';
 
 function Login() {
 
@@ -38,7 +39,7 @@ function Login() {
         <LoginForm Login={Login} error={Error}/>
         <div className="error">{error}</div>
       </div>
-      )} 
+      )}
     </div>
   );
 }
