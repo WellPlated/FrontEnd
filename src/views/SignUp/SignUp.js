@@ -1,24 +1,18 @@
-import '../../css/Login.css';
+import '../../css/SignUp.css';
 import React, { useState } from 'react';
-import LoginForm from './LoginForm';
-import { useHistory } from 'react-router';
+import SignUpForm from './SignUpForm';
 
-function Login() {
+function SignUp() {
 
   const [user, setUser] = useState({name: "", password: ""});
   const [error, setError] = useState("");
 
-  const Login = details => {
+  const SignUp = details => {
     setUser({
       name: details.name,
-      email: details.email
+      password: details.password
   });
     console.log(user);
-  }
-
-  const Logout = () => {
-    setUser({name: "", password: ""});
-    console.log("logout");
   }
 
   const Error = message => {
@@ -29,17 +23,16 @@ function Login() {
     <div className="App">
       { (user.name !== "") ? (
         <div className="welcome">
-          <h2>Welcome, <span>{user.name}</span></h2>
-          <button onClick={Logout}>Logout</button>
+          <h2>Hi <span>{user.name}</span>!</h2>
           </div>
       ) : (
       <div>
-        <LoginForm Login={Login} error={Error}/>
+        <SignUpForm SignUp={SignUp} error={Error}/>
         <div>{error}</div>
       </div>
-      )}
+      )} 
     </div>
   );
 }
 
-export default Login;
+export default SignUp;
