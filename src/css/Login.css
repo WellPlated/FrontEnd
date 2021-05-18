@@ -129,7 +129,7 @@ a {
 }
 
 a:hover {
-  background-image: linear-gradient(to right, #ffbb00 25%, #f5a40d 50%, #FE4880);
+  background-image: linear-gradient(to right, #f7a36b 25%, #f58856 50%, #FE4880);
 } 
 
 a:active {
