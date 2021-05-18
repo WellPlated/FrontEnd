@@ -41,8 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeCard() {
+export default function RecipeCard(props) {
   const classes = useStyles();
+
+  console.log("RECIPE CARD")
+  console.log(props.date)
 
   return (
     <Card className={classes.root}>
@@ -57,8 +60,8 @@ export default function RecipeCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={props.name}//"Shrimp and Chorizo Paella"
+        subheader= {props.date}//"September 14, 2016"
       />
       <CardMedia
         className={classes.media}
@@ -67,8 +70,7 @@ export default function RecipeCard() {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
