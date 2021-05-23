@@ -22,16 +22,8 @@ function SignUp() {
 
   return (
     <div className="App">
-      { (user.name !== "") ? (
-        <div className="welcome">
-          <h2>Hi <span>{user.name}</span>!</h2>
-          </div>
-      ) : (
-      <div>
-        <SignUpForm SignUp={SignUp} error={Error}/>
-        <div>{error}</div>
-      </div>
-      )} 
+        <div><SignUpForm SignUp={SignUp} error={Error}/></div>
+        <div className="error">{error}</div>
     </div>
   );
 }
