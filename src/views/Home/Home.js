@@ -13,7 +13,11 @@ function Home(props) {
           <Grid item xs={12}>
             <h1>Our Kitchen Cache</h1>
           </Grid>
-          <Recipes />
+          <Grid container item xs={12} spacing={3} justify="flex-end">
+            <Grid item>
+              <Recipes />
+            </Grid>
+          </Grid>
         </Grid>
       </header>
     </div>

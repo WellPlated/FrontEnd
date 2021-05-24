@@ -16,6 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Chip from "@material-ui/core/Chip"
 //img
 import testImage from "../../img/shrimp-paella.jpg";
 
@@ -40,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  tags: {
+    overflow: "auto",
+  },
+  tag: {
+    margin: theme.spacing(0.5)
+  }
 }));
 
 export default function RecipeCard(props) {
@@ -78,6 +85,11 @@ export default function RecipeCard(props) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+        <div>
+          {props.tags.map((value) => (
+            <Chip className={classes.tag} variant="default" size="small" label={value}/>
+          ))}
+        </div>
       </CardActions>
     </Card>
   );
