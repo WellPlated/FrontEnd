@@ -1,14 +1,29 @@
 .sidenav {
   height: 100%;
+  width: 15%;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #946c6c;
+  background-color: #f18973;
   transition: 0.5s ease;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 15%;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  font-style: italic;
+}
+
+.sidenav a{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.header {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  color: white;
+  text-align: center;
 }

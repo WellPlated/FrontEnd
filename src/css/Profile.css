@@ -1,11 +1,7 @@
-.App {
+.Profile {
     text-align: center;
+    margin-left: 15%;
   }
-  
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,27 +9,59 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Profile-header {
+  background-color:#ffffff ;
+  min-height: 9vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  color:  #bc5a45;
+  
+}
+.headerPage {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: bold;
+  color: #bc5a45;
+  font-size: 45px;
+}
+.headerProfilePage {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: bold;
+  color: #bc5a45;
+  font-size: 30px;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
-.App-link {
+.Profile-divider{
+  
+  width: 3px;
+  background-color: #bc5a45;
+}
+
+.Profile-content-background{
+  background-color: #ffffff;
+  min-height: 100vh;
+ 
+}
+.Profile-content{
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: calc(10px + 2vmin);
+  color:  #f18973;
+}
+
+.Profile-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.not-logged-in {
+  padding: 200px;
 }
-  

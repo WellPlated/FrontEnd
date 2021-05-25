@@ -8,7 +8,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './views/Home/Home.js';
 import Login from './views/Login/Login'
 import Profile from "./views/Profile/Profile";
+import SignUp from "./views/SignUp/SignUp";
 import SideNav from "./views/SideNav/SideNav";
+import Upload from "./views/Upload/Upload";
 
 var hist = createBrowserHistory();
 
@@ -18,7 +20,9 @@ ReactDOM.render(
     <div className="main-container">
       <Switch>
         <Route path="/Profile" component={Profile} />
+        <Route path="/SignUp" component={SignUp} />
         <Route path="/Login" component={Login} />
+        <Route path="/Upload" component={Upload} />
         <Route path="/" component={Home} />
       </Switch>
     </div>

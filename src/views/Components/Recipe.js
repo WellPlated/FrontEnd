@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Recipe(props) {
   const classes = useStyles();
 
+  console.log("RECIPE CARD")
+  console.log(props.date)
+
   return (
     <Card className={classes.root}>
       <CardHeader

@@ -1,6 +1,6 @@
 .Home {
   text-align: center;
-  
+  margin-left: 15%;
 }
 
 .Home-logo {
@@ -13,6 +13,12 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+.recipeCache {
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
 
 .Home-header {
   background-color: #282c34;
