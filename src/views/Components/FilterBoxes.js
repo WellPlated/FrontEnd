@@ -20,37 +20,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tags = [
-  {
-    "id": 1,
-    "name": "Vegetarian"
-  },
-  {
-    "id": 2,
-    "name": "Vegan"
-  },
-  {
-    "id": 3,
-    "name": "Nut-Free"
-  },
-  {
-    "id": 4,
-    "name": "Dairy-Free"
-  },
-  {
-    "id": 5,
-    "name": "Breakfast"
-  },
-  {
-    "id": 6,
-    "name": "Lunch"
-  },
-  {
-    "id": 7,
-    "name": "Dinner"
-  },
+  "Vegetarian",
+  "Vegan",
+  "Keto",
+  "Paleo",
+  "Italian",
+  "Chinese",
+  "French",
+  "Mexican",
+  "Nut-Free",
+  "Dairy-Free",
+  "Breakfast",
+  "Lunch",
+  "Dinner",
 ];
 
-export default function Filters(props) {
+export default function FilterBoxes(props) {
   const classes = useStyles();
   const [checked, setChecked] = useState([]);
 
@@ -76,12 +61,12 @@ export default function Filters(props) {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={checked.indexOf(value.id) === -1 ? false : true}
-                  onChange={() => handleToggle(value.id)}
-                  name={value.name}
+                  checked={checked.indexOf(value) === -1 ? false : true}
+                  onChange={() => handleToggle(value)}
+                  name={value}
                 />
               }
-              label={value.name}
+              label={value}
             />
           ))}
         </FormGroup>

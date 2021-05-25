@@ -43,13 +43,14 @@ const useStyles = makeStyles((theme) => ({
   },
   tags: {
     overflow: "auto",
+    flexWrap: "nowrap",
   },
   tag: {
     margin: theme.spacing(0.5)
   }
 }));
 
-export default function RecipeCard(props) {
+export default function Recipe(props) {
   const classes = useStyles();
 
   return (
@@ -85,17 +86,17 @@ export default function RecipeCard(props) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <div>
-          {props.tags.map((value) => (
+        <div className={classes.tags}>
+          {/* {props.tags.map((value) => (
             <Chip className={classes.tag} variant="default" size="small" label={value}/>
-          ))}
+          ))} */}
         </div>
       </CardActions>
     </Card>
   );
 }
 
-RecipeCard.propTypes = {
+Recipe.propTypes = {
   date: PropTypes.string,
   description: PropTypes.string,
   id: PropTypes.number,
