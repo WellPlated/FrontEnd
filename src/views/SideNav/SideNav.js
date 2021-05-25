@@ -4,7 +4,7 @@ import '../../css/SideNav.css';
 const SideNav = (props) => {
   return (
     <div className="sidenav">
-      <h1 className="header" href="/">Well Plated</h1>
+      <h1 className="header"><a href="/">Well Plated</a></h1>
       <a href="/Profile">View Profile</a>
       <a href="/Login">Login</a>
       <a href="/Upload">Upload</a>

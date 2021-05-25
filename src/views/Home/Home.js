@@ -53,7 +53,7 @@ export default function Home() {
       <header className="Home-header">
         <Grid container spacing={5}>
           <Grid item xs={12}>
-            <h1>Our Kitchen Cache</h1>
+            <h1>Your Kitchen</h1>
           </Grid>
           <Grid container item xs={12} spacing={3} justify="flex-end">
             <Grid item xs={3}>
