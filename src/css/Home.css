@@ -1,7 +1,6 @@
 .Home {
   text-align: center;
   margin-left: 15%;
-  
 }
 
 .Home-logo {
@@ -30,6 +29,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-left: 15%;
 }
 
 .Home-link {

@@ -7,6 +7,7 @@ const SideNav = (props) => {
       <h1 className="header" href="/">Well Plated</h1>
       <a href="/Profile">View Profile</a>
       <a href="/Login">Login</a>
+      <a href="/Upload">Upload</a>
       <a href="#section">About Us</a>
     </div>
   );
