@@ -16,6 +16,7 @@ function SignUp() {
       password: details.password
   });
     console.log(user);
+    localStorage.setItem("username", details.name);
   }
 
   const Error = message => {
@@ -25,14 +26,16 @@ function SignUp() {
   let history = useHistory()
 
   const handleOnSubmit = () => {
-    history.push(`/Profile`);
+    window.location = '/Profile';;
   }
 
   return (
     <div className="App">
+      <div>
         <div><SignUpForm SignUp={SignUp} error={Error} onSubmit={handleOnSubmit}/></div>
         <div className="error">{error}</div>
-    </div>
+      </div>
+  </div>
   );
 }
 

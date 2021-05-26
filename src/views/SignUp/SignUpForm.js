@@ -21,6 +21,7 @@ function SignUpForm({ SignUp, error, onSubmit }) {
             if (response['data']['status'] === 200) {
                 console.log("Sign up was successful!")
                 onSubmit()
+                SignUp(details)
                 // Automatically log in the user
             }
             else if (response['data']['status'] === 403) {

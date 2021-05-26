@@ -28,21 +28,21 @@ function Login() {
   }
 
   let history = useHistory()
+
   const handleOnSubmit = () => {
-    history.push(`/Profile`);
+    window.location = '/Profile';
   }
 
   return (
     <div className="App">
       { ("username" in localStorage) ? (
-        // <div className="welcome">
-        //   <h2>hi, <span>{localStorage.getItem("username")}</span></h2>
-        //   <button onClick={Logout}>Logout</button>
-        //   </div>
-        handleOnSubmit()
+        <div className="welcome">
+          <h2>Welcome, <span>{localStorage.getItem("username")}</span>!</h2>
+          <button onClick={Logout}>Logout</button>
+          </div>
       ) : (
       <div>
-        <LoginForm Login={Login} error={Error}/>
+        <LoginForm Login={Login} error={Error} onSubmit={handleOnSubmit}/>
         <div className="error">{error}</div>
       </div>
       )}
