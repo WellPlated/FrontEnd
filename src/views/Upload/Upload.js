@@ -6,6 +6,7 @@ function Upload() {
 
   const [recipe, setRecipe] = useState({title: "", cuisine: "", description: "", ingredients: "", steps: "", tags: ""});
   const [error, setError] = useState("");
+  const userToken = localStorage.getItem("token");
 
   const Upload = details => {
     setRecipe({
@@ -15,6 +16,7 @@ function Upload() {
       ingredients: details.ingredients,
       steps: details.steps,
       tags: details.tags,
+      user_id: userToken,
   });
     console.log(recipe);
   }
