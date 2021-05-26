@@ -27,8 +27,9 @@ function Login() {
     setError(message);
   }
 
+  let history = useHistory()
   const handleOnSubmit = () => {
-    this.props.history.push(`/Profile`);
+    history.push(`/Profile`);
   }
 
   return (
