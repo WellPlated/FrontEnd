@@ -27,13 +27,18 @@ function Login() {
     setError(message);
   }
 
+  const handleOnSubmit = () => {
+    this.props.history.push(`/Profile`);
+  }
+
   return (
     <div className="App">
       { ("username" in localStorage) ? (
-        <div className="welcome">
-          <h2>Welcome, <span>{localStorage.getItem("username")}</span></h2>
-          <button onClick={Logout}>Logout</button>
-          </div>
+        // <div className="welcome">
+        //   <h2>hi, <span>{localStorage.getItem("username")}</span></h2>
+        //   <button onClick={Logout}>Logout</button>
+        //   </div>
+        handleOnSubmit()
       ) : (
       <div>
         <LoginForm Login={Login} error={Error}/>

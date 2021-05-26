@@ -1,5 +1,7 @@
 import '../../css/SignUp.css';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router'
+import { withRouter } from "react-router";
 import SignUpForm from './SignUpForm';
 
 function SignUp() {
@@ -20,9 +22,15 @@ function SignUp() {
     setError(message);
   }
 
+  let history = useHistory()
+
+  const handleOnSubmit = () => {
+    history.push(`/Profile`);
+  }
+
   return (
     <div className="App">
-        <div><SignUpForm SignUp={SignUp} error={Error}/></div>
+        <div><SignUpForm SignUp={SignUp} error={Error} onSubmit={handleOnSubmit}/></div>
         <div className="error">{error}</div>
     </div>
   );
