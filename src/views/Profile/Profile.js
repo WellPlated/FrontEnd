@@ -64,7 +64,7 @@ function Profile() {
   const classes = useStyles();
 
   if (Object.keys(myrecipes).length === 0) // if DOM renders before data is fetched or if user is not logged in
-  { return <div className="not-logged-in">You must be logged in to access your recipes</div> }
+  { return <div className="not-logged-in">Not logged in! No recipes to display.</div> }
 
   return (
     <div className="Profile">
