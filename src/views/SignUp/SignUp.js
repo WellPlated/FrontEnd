@@ -1,5 +1,7 @@
 import '../../css/SignUp.css';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router'
+import { withRouter } from "react-router";
 import SignUpForm from './SignUpForm';
 
 function SignUp() {
@@ -14,17 +16,26 @@ function SignUp() {
       password: details.password
   });
     console.log(user);
+    localStorage.setItem("username", details.name);
   }
 
   const Error = message => {
     setError(message);
   }
 
+  let history = useHistory()
+
+  const handleOnSubmit = () => {
+    window.location = '/Profile';;
+  }
+
   return (
     <div className="App">
-        <div><SignUpForm SignUp={SignUp} error={Error}/></div>
+      <div>
+        <div><SignUpForm SignUp={SignUp} error={Error} onSubmit={handleOnSubmit}/></div>
         <div className="error">{error}</div>
-    </div>
+      </div>
+  </div>
   );
 }
 
