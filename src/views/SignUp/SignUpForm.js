@@ -4,7 +4,7 @@ import axios from 'axios';
 import Login from '../Login/Login';
 import '../../css/SignUp.css';
 
-function SignUpForm({ SignUp, error }) {
+function SignUpForm({ SignUp, error, onSubmit }) {
     const [details, setDetails] = useState({email: "", name: "", password: ""});
 
     const submitHandler = e => {
@@ -20,6 +20,8 @@ function SignUpForm({ SignUp, error }) {
             console.log(response);
             if (response['data']['status'] === 200) {
                 console.log("Sign up was successful!")
+                onSubmit()
+                SignUp(details)
                 // Automatically log in the user
             }
             else if (response['data']['status'] === 403) {
