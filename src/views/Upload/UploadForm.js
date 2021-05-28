@@ -4,27 +4,12 @@ import axios from 'axios';
 import '../../css/Upload.css';
 import Select from "react-select";
 
-function UploadForm({ Login, error }) {
+function UploadForm({ Upload, error, onSubmit }) {
     const [details, setDetails] = useState({title: "", cuisine: "", description: "", ingredients: "", recipe: "", tags: []});
     var today = new Date();
     const recipeDate = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear() ;
     const userToken = localStorage.getItem("token");
 
-    const tagOptions = [
-        { value: 'Vegetarian', label: 'Vegetarian' },
-        { value: 'Vegan', label: 'Vegan' },
-        { value: 'Keto', label: 'Keto' },
-        { value: 'Paleo', label: 'Paleo' },
-        { value: 'Italian', label: 'Italian' },
-        { value: 'Chinese', label: 'Chinese' },
-        { value: 'French', label: 'French' },
-        { value: 'Mexican', label: 'Mexican' },
-        { value: 'Nut-Free', label: 'Nut-Free' },
-        { value: 'Dairy-Free', label: 'Dairy-Free' },
-        { value: 'Breakfast', label: 'Breakfast' },
-        { value: 'Lunch', label: 'Lunch' },
-        { value: 'Dinner', label: 'Dinner' },
-    ]
     
     const handleChange = (event) => {
         let tempItems = []
@@ -52,7 +37,7 @@ function UploadForm({ Login, error }) {
         axios.post('http://127.0.0.1:5000/upload', {
             title : details.title,
             date: recipeDate,
-            //cuisine : details.cuisine,
+            cuisine : details.cuisine,
             description: details.description,
             ingredients: details.ingredients,
             recipe: details.recipe,
@@ -60,12 +45,12 @@ function UploadForm({ Login, error }) {
             user_id: userToken,
         })
             .then(function(response){
-                console.log(response);
-                // if (response['data']['status'] === 200) {
-                //     Login(details);
-                //     localStorage.setItem("token", response['data']['access_token'])
-                //     console.log(localStorage.getItem("token"))
-                // }
+                if (response['data']['status'] === 200) {
+                    localStorage.setItem("recipe", "exists");
+                    Upload()
+                    onSubmit()
+                    console.log("uploaded recipe")
+                }
                 if (response['data']['status'] === 403) {
                     error(response['data']['message'])
                 }
@@ -140,7 +125,7 @@ function UploadForm({ Login, error }) {
                     
                     
                 </div>
-                <input type="submit" value="Publish" />
+                <input type="submit" value="UPLOAD" />
             </div>
         </form>
     )

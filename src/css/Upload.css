@@ -155,3 +155,17 @@ a:hover {
 a:active {
   background-color: rgb(255, 106, 60);
 }
+
+.welcome {
+  width: 100%;
+  max-width: 480px;
+  background-color: #FFF;
+  padding: 15px 30px;
+}
+
+.welcome h2 {
+  color: #888;
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
