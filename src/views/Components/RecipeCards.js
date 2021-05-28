@@ -6,15 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import Recipe from "./Recipe.js";
 import { Link } from 'react-router-dom';
 
-
-
-const clickTest = (data) => {
-  console.log(data.name + " is clicked!");
-  //window.location.href = "/Display";
-  localStorage.setItem("data", JSON.stringify(data));
-}
-
-
 export default function RecipeCards(props) {
   return (
     <div className="recipes-container">
@@ -28,7 +19,6 @@ export default function RecipeCards(props) {
                   info: JSON.stringify(data)
                 }
               }}>
-              {/*<Route exact path="/Desplay/:index" component={recipeDisplay}/>*/}
               <Recipe
                 date={data.date}
                 id={data.id}

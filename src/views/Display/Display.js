@@ -21,6 +21,7 @@ export default function Display(props) {
     console.log("Comment added: " + comment.current.value);
     e.preventDefault();
     }
+    //Need to submit comment to database later
     return (<div>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups. Index: {index}</div>);
     /* return (
         <div className="display-main">
@@ -82,6 +83,8 @@ export default function Display(props) {
                 </Grid>
                 </Grid>
                
+                //~~NEED to display comments after retrieving from database~~
+
           </header>
           </header> 
         </div>); */

@@ -15,16 +15,6 @@ import Display from "./views/Display/Display";
 
 var hist = createBrowserHistory();
 
-const recipeDisplay = ({match, location}) => {
-  console.log(match);
-  const {
-    params: { index }
-  } = match;
-  return(
-    <div>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups. {index}</div>
-  );
-};
-
 ReactDOM.render(
   <Router history={hist} onUpdate={() => window.scrollTo(0, 0)}>
     <SideNav name="Test" />
