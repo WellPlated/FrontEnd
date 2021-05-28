@@ -6,21 +6,29 @@ import Grid from "@material-ui/core/Grid";
 import Recipe from "./Recipe.js";
 import { Link } from 'react-router-dom';
 
+
+
 const clickTest = (data) => {
   console.log(data.name + " is clicked!");
-  window.location.href = "/Display";
+  //window.location.href = "/Display";
   localStorage.setItem("data", JSON.stringify(data));
 }
+
 
 export default function RecipeCards(props) {
   return (
     <div className="recipes-container">
-        <Grid container >
-          {props.recipes.map((data) => {
+        <Grid container zeroMinWidth alignItems="center">
+          {props.recipes.map((data, index) => {
             return (
-            <Grid item onClick={() => {
-              clickTest(data);
-            }} xs={12} md={6} lg={3}>
+            <Grid item xs={12} md={6} lg={3} >
+              <Link to={{
+                pathname: `/Display/${index+1}`, //put data.randnum here to use as url instead of index, no need for index in map either, will change Display once randnum works
+                query: {
+                  info: JSON.stringify(data)
+                }
+              }}>
+              {/*<Route exact path="/Desplay/:index" component={recipeDisplay}/>*/}
               <Recipe
                 date={data.date}
                 id={data.id}
@@ -31,7 +39,9 @@ export default function RecipeCards(props) {
                 tags={data.tags}
                 user={data.user}
               />
+              </Link>
             </Grid>
+            
             );
           })}
       </Grid>

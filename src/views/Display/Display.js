@@ -6,19 +6,23 @@ import Shrimp from "../../img/shrimp-paella.jpg";
 import '../../css/Display.css';
 // Components
 
-//Using local storage for now, working on using props
-let info = JSON.parse(localStorage.getItem("data"));
 
 
-export default function Display() {
+export default function Display(props) {
+    console.log(props);
+    const {
+      params: { index }
+    } = props.match;
+    //const info = JSON.parse(props.location.query.info)
+    //console.log(info);
     const comment = React.useRef(null);
-    console.log(localStorage.getItem("data"));
+    //console.log(localStorage.getItem("data"));
     const handleSubmit = e => {
     console.log("Comment added: " + comment.current.value);
     e.preventDefault();
     }
-
-    return (
+    return (<div>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups. Index: {index}</div>);
+    /* return (
         <div className="display-main">
           <header className="display-header">
             <Grid container direction="row" justify='center' spacing={1}>
@@ -80,5 +84,5 @@ export default function Display() {
                
           </header>
           </header> 
-        </div>);
+        </div>); */
     }
