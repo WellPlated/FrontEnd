@@ -41,6 +41,8 @@
 .submit-comment-button{
   color:whitesmoke;
   font-size: 25px;
+  border: white;
+  border-width: 10px;
 }
 .display-content{
   background-color: #282c34;
