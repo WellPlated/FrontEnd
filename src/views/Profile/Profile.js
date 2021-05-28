@@ -18,6 +18,7 @@ function Profile() {
 
   const [error, setError] = useState("");
   const [myrecipes, setMyRecipes] = useState({});
+  const [refresh, setRefresh] = useState(false);
 
   useEffect (async () => {
 
@@ -95,7 +96,7 @@ function Profile() {
                 
                 { myrecipes.map( recipe => 
                   <Grid item xs={5} md={3} className={classes.root} ><RecipeCard 
-                    date={recipe["date"]} name ={recipe["name"]} description={recipe["description"]}/>
+                    date={recipe["date"]} name ={recipe["name"]} description={recipe["description"]} id={recipe["id"]} refresh={() => setRefresh(!refresh)}/>
                   </Grid>)
                 }
               </Grid>
@@ -107,7 +108,7 @@ function Profile() {
           <div className="headerProfilePage">Liked Recipes</div>
           <Grid container direction="row" justify="center" spacing={1}>
             <Grid item xs={5} md={3} className={classes.root} ><RecipeCard 
-              date={myrecipes[0]["date"]} name={myrecipes[0]["name"]} description={myrecipes[0]["description"]}/>
+              date={myrecipes[0]["date"]} name={myrecipes[0]["name"]} description={myrecipes[0]["description"]} id={myrecipes[0]["id"]} refresh={() => setRefresh(!refresh)}/>
             </Grid>
           </Grid>
         </Grid>
