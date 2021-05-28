@@ -4,16 +4,18 @@ import { recipes } from "../../jsontest/db.json";
 import Grid from "@material-ui/core/Grid";
 // Components
 import Recipe from "./Recipe.js";
+import { Link } from 'react-router-dom';
 
 const clickTest = (data) => {
-  console.log(data.tags + " is clicked!");
-  window.open("/", "_blank")
+  console.log(data.name + " is clicked!");
+  window.location.href = "/Display";
+  localStorage.setItem("data", JSON.stringify(data));
 }
 
 export default function RecipeCards(props) {
   return (
     <div className="recipes-container">
-      <Grid container >
+        <Grid container >
           {props.recipes.map((data) => {
             return (
             <Grid item onClick={() => {
