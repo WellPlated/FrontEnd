@@ -10,7 +10,7 @@ import '../../css/Display.css';
 export default function Display(props) {
   let info = undefined;
   const comment = React.useRef(null);
-    //console.log(localStorage.getItem("data"));
+     //Need to submit comment to database later
     const handleSubmit = e => {
     console.log("Comment added: " + comment.current.value);
     e.preventDefault();
@@ -32,19 +32,17 @@ export default function Display(props) {
     info = JSON.parse(props.location.query.info)
   }
 
-  console.log(info);
   //In case, recipe not found
   if (info === undefined){
     return null;
   }
-    //Need to submit comment to database later
+   
     let cuisine = info.cuisine;
     if (info.cuisine === "Drinks/Bevs"){
       cuisine = "Drinks";
     }
     const image = require('../../img/' + cuisine + '.jpg');
-    //let image = images(`./${info.cuisine}.jpg`);
-    console.log(image);
+
     return (
         <div className="display-main">
           <header className="display-header">
@@ -63,7 +61,7 @@ export default function Display(props) {
             <Grid container direction="column" justify="space-between" spacing={3}>
               <Grid container direction="row" spacing={9}>
                 <Grid item xs={5}>
-                    <img src={image.default}/>
+                    <img className="image" src={image.default}/>
                   </Grid>
                 <Grid item xs={5}>
                     <Grid container direction="column" justify="space-between" spacing={5}>

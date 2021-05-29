@@ -42,8 +42,9 @@
   color:whitesmoke;
   font-size: 25px;
   border: white;
-  border-width: 10px;
+  border-width: 50px;
 }
+
 .display-content{
   background-color: #282c34;
   min-height: 110vh;
@@ -51,4 +52,9 @@
   padding-right: 15%;
   font-size: calc(10px + 2vmin);
   color:  #ffffff;
+}
+
+.image{
+  width:600px;
+  height:600px;
 }
