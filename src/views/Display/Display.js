@@ -1,13 +1,10 @@
 import React from 'react';
 // @material-ui components
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 import Shrimp from "../../img/shrimp-paella.jpg";
 import '../../css/Display.css';
-import axios from 'axios';
+
 // Components
-
-
 
 export default function Display(props) {
   let info = undefined;
@@ -18,25 +15,24 @@ export default function Display(props) {
     e.preventDefault();
     }
   
-  //Accessing through direct url, e.g. shared links (no query passed)
+  //Accessing through direct url, e.g. shared links (no query passed, have to use local storage from Home.js)
   if (!props.location.hasOwnProperty('query')){
     const recipes = JSON.parse(localStorage.getItem("recipes"));
-    console.log(props.match.params.hash);
     recipes.forEach(element => {
       if (element.hash === parseInt(props.match.params.hash)){
         info = element;
         return;
       }
     });
-    console.log(info);
-
   }
+
   //Accessing through Kitchen Cache/My Profile (query passed)
   else{
     info = JSON.parse(props.location.query.info)
-    console.log(info);
   }
+
   console.log(info);
+  //In case, recipe not found
   if (info === undefined){
     return null;
   }
