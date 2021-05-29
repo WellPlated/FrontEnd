@@ -6,6 +6,7 @@ import '../../css/Display.css';
 
 // Components
 
+
 export default function Display(props) {
   let info = undefined;
   const comment = React.useRef(null);
@@ -37,7 +38,13 @@ export default function Display(props) {
     return null;
   }
     //Need to submit comment to database later
-
+    let cuisine = info.cuisine;
+    if (info.cuisine === "Drinks/Bevs"){
+      cuisine = "Drinks";
+    }
+    const image = require('../../img/' + cuisine + '.jpg');
+    //let image = images(`./${info.cuisine}.jpg`);
+    console.log(image);
     return (
         <div className="display-main">
           <header className="display-header">
@@ -56,7 +63,7 @@ export default function Display(props) {
             <Grid container direction="column" justify="space-between" spacing={3}>
               <Grid container direction="row" spacing={9}>
                 <Grid item xs={5}>
-                    <img  src={Shrimp}></img>
+                    <img src={image.default}/>
                   </Grid>
                 <Grid item xs={5}>
                     <Grid container direction="column" justify="space-between" spacing={5}>
