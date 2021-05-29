@@ -4,29 +4,36 @@ import UploadForm from './UploadForm';
 
 function Upload() {
 
-  const [recipe, setRecipe] = useState({title: "", cuisine: "", description: "", ingredients: "", steps: "", tags: ""});
+  const [recipe, setRecipe] = useState({title: "", cuisine: "", description: "", ingredients: "", recipe: "", tags: []});
   const [error, setError] = useState("");
+  const userToken = localStorage.getItem("token");
 
   const Upload = details => {
-    setRecipe({
-      title: details.title,
-      cuisine: details.cuisine,
-      description: details.description,
-      ingredients: details.ingredients,
-      steps: details.steps,
-      tags: details.tags,
-  });
-    console.log(recipe);
+    
+    console.log("uploading");
+    localStorage.setItem("recipe", "exists");
+  }
+
+  const NewUpload = () => {
+    setRecipe({title: "", cuisine: "", description: "", ingredients: "", recipe: "", tags: []});
+    localStorage.removeItem("recipe");
+    console.log("new upload");
   }
 
   const Error = message => {
     setError(message);
   }
+  
+  const handleOnSubmit = () => {
+    //window.location = '/Profile';
+  }
 
   return (
-    <div className="App">
-        <div><UploadForm SignUp={Upload} error={Error}/></div>
+    <div className="App">  
+      <div>
+        <UploadForm Upload={Upload} error={Error} onSubmit={handleOnSubmit}/>
         <div className="error">{error}</div>
+      </div>
     </div>
   );
 }

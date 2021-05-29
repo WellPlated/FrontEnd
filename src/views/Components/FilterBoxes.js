@@ -33,6 +33,7 @@ const tags = [
   "Breakfast",
   "Lunch",
   "Dinner",
+  "Drinks"
 ];
 
 export default function FilterBoxes(props) {

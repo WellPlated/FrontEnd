@@ -123,12 +123,11 @@ form .form-inner input[type="submit"]:hover {
 
 .error {
   padding: 20px;
-
 }
 
 a {
-  background-color: #f77d7d;
-  color: white;
+  background-color: #f08a8a;
+  color: rgb(255, 255, 255);
   padding: 1em 1em;
   text-align: center;
   text-decoration: none;
