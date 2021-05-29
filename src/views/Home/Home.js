@@ -24,6 +24,7 @@ export default function Home() {
             .then(function(response){
                 console.log(response);
                 setRecipes(response.data);
+                localStorage.setItem("recipes", JSON.stringify(response.data))
                 if (response['data']['status'] === 200) {
                   setRecipes(response.data);
                 }

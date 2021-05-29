@@ -4,26 +4,45 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Shrimp from "../../img/shrimp-paella.jpg";
 import '../../css/Display.css';
+import axios from 'axios';
 // Components
 
 
 
 export default function Display(props) {
-    console.log(props);
-    const {
-      params: { index }
-    } = props.match;
-    //const info = JSON.parse(props.location.query.info)
-    //console.log(info);
-    const comment = React.useRef(null);
+  let info = undefined;
+  const comment = React.useRef(null);
     //console.log(localStorage.getItem("data"));
     const handleSubmit = e => {
     console.log("Comment added: " + comment.current.value);
     e.preventDefault();
     }
+  
+  //Accessing through direct url, e.g. shared links (no query passed)
+  if (!props.location.hasOwnProperty('query')){
+    const recipes = JSON.parse(localStorage.getItem("recipes"));
+    console.log(props.match.params.hash);
+    recipes.forEach(element => {
+      if (element.hash === parseInt(props.match.params.hash)){
+        info = element;
+        return;
+      }
+    });
+    console.log(info);
+
+  }
+  //Accessing through Kitchen Cache/My Profile (query passed)
+  else{
+    info = JSON.parse(props.location.query.info)
+    console.log(info);
+  }
+  console.log(info);
+  if (info === undefined){
+    return null;
+  }
     //Need to submit comment to database later
-    return (<div>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups. Index: {index}</div>);
-    /* return (
+
+    return (
         <div className="display-main">
           <header className="display-header">
             <Grid container direction="row" justify='center' spacing={1}>
@@ -38,13 +57,13 @@ export default function Display(props) {
       
           <header className="display-content-background">
             <header className="display-content">
-            <Grid container direction="column" justify="left" spacing={3}>
+            <Grid container direction="column" justify="space-between" spacing={3}>
               <Grid container direction="row" spacing={9}>
                 <Grid item xs={5}>
                     <img  src={Shrimp}></img>
                   </Grid>
                 <Grid item xs={5}>
-                    <Grid container direction="column" justify="left" spacing={5}>
+                    <Grid container direction="column" justify="space-between" spacing={5}>
                         <Grid item xs={9}>
                             <div><b>Chef: </b> {info.user}</div>
                         </Grid>
@@ -83,9 +102,9 @@ export default function Display(props) {
                 </Grid>
                 </Grid>
                
-                //~~NEED to display comments after retrieving from database~~
+                {/*~~NEED to display comments after retrieving from database~~*/}
 
           </header>
           </header> 
-        </div>); */
-    }
+        </div>); 
+  }  

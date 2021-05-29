@@ -24,7 +24,7 @@ ReactDOM.render(
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Login" component={Login} />
         <Route path="/Upload" component={Upload} />
-        <Route path="/Display/:index" component={Display} />
+        <Route path="/Display/:hash" component={Display} />
         {/*<Route path="/recipees/:index" component={recipeDisplay}/>*/}
         <Route path="/" component={Home} />
       </Switch>
