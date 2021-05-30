@@ -74,6 +74,12 @@ export default function Recipe(props) {
         });
   }
 
+  const likeRecipe = (id) => {
+
+
+    
+  }
+
   return (
     <div>
       <Card className={classes.root}>
@@ -88,7 +94,7 @@ export default function Recipe(props) {
               <DeleteIcon />
             </IconButton>
           }
-          title={props.name}
+          title={props.title}
           subheader={props.date}
         />
         <CardMedia

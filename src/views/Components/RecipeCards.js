@@ -17,7 +17,7 @@ export default function RecipeCards(props) {
                 id={data.id}
                 description={data.description}
                 ingredient={data.ingredients}
-                name={data.name}
+                title={data.title}
                 recipe={data.recipe}
                 tags={data.tags}
                 user={data.user}
