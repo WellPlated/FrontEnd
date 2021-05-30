@@ -5,7 +5,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #ffa2a7;
+  background-color: #f18973;
   transition: 0.5s ease;
   overflow-x: hidden;
   display: flex;
@@ -13,7 +13,12 @@
   align-items: center;
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
-  text-decoration-color: white;
+  font-style: italic;
+}
+
+.sidenav a{
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .header {

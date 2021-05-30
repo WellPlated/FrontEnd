@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from "prop-types";
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -13,9 +14,12 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
+import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import Chip from "@material-ui/core/Chip"
+import axios from 'axios';
+//img
 import testImage from "../../img/shrimp-paella.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,49 +43,89 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  tags: {
+    overflow: "auto",
+    flexWrap: "nowrap",
+  },
+  tag: {
+    margin: theme.spacing(0.5)
+  }
 }));
 
-export default function RecipeCard(props) {
+export default function Recipe(props) {
   const classes = useStyles();
 
   console.log("RECIPE CARD")
   console.log(props.date)
 
+  const deleteRecipe = (id, refresh) => {
+    console.log("Will delete the recipe with this description: " + id);
+    axios.post('http://127.0.0.1:5000/delete', {
+            id: id
+        })
+
+        .then (function(response) {
+          // refresh the profile page
+          refresh()
+          console.log(response);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  }
+
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+    <div>
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              {props.user_id}
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="trash" onClick={() => deleteRecipe(props.id, props.refresh)}>
+              <DeleteIcon />
+            </IconButton>
+          }
+          title={props.name}
+          subheader={props.date}
+        />
+        <CardMedia
+          className={classes.media}
+          // image={props.image}
+          title={props.description}
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.description}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
           </IconButton>
-        }
-        title={props.name}//"Shrimp and Chorizo Paella"
-        subheader= {props.date}//"September 14, 2016"
-      />
-      <CardMedia
-        className={classes.media}
-        image={testImage}
-        title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        
-      </CardActions>
-    </Card>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+          <div className={classes.tags}>
+            {/* {props.tags.map((value) => (
+              <Chip className={classes.tag} variant="default" size="small" label={value}/>
+            ))} */}
+          </div>
+        </CardActions>
+        </Card>
+      </div>
   );
 }
+
+Recipe.propTypes = {
+  date: PropTypes.string,
+  description: PropTypes.string,
+  id: PropTypes.number,
+  ingredients: PropTypes.string,
+  name: PropTypes.string,
+  recipe: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
+  user_id: PropTypes.number
+};

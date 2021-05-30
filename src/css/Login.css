@@ -5,6 +5,7 @@
     justify-content: center;
     text-align: center;
     background-color: #f8cbcb;
+    margin-left: 15%;
   }
 
 * {
@@ -36,7 +37,9 @@ form:after {
   background-image: linear-gradient(to bottom right, #fadd6a, #ff526f);
 }
 
+
 form .form-inner {
+  
   position: relative;
   display: block;
   background-color: #FFF;
@@ -120,12 +123,11 @@ form .form-inner input[type="submit"]:hover {
 
 .error {
   padding: 20px;
-
 }
 
 a {
-  background-color: #f77d7d;
-  color: white;
+  background-color: #f08a8a;
+  color: rgb(255, 255, 255);
   padding: 1em 1em;
   text-align: center;
   text-decoration: none;

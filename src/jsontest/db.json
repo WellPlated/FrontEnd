@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "email": "regular@example.com",
+      "password": "Fgtbe0DCXRBELG",
+      "id": 1
+    },
+    {
+      "email": "admin@example.com",
+      "password": "qc88PF/OQhOG",
+      "id": 2
+    }
+  ],
+  "recipes": [
+    {
+        "date": "01/01/2021\n", 
+        "description": "Rice dish with veggies and stuff", 
+        "id": 1, 
+        "ingredients": "Rice, Oil, Veggies", 
+        "name": "Stir Fry", 
+        "recipe": "Cook Rice and Serve", 
+        "tags": ["Vegetarian", "Healthy"], 
+        "user_id": 1
+    }, 
+    {
+        "date": "01/01/2021\n", 
+        "description": "A quick healthy snack", 
+        "id": 2, 
+        "ingredients": "Strawberries, Milk, Protein Powder", 
+        "name": "Smoothie", 
+        "recipe": "Put ingredients in Blender, Blend, Serve", 
+        "tags": ["Breakfast", "Vegetarian", "Nut Free", "Snack"],
+        "user_id": 1
+    }, 
+    {
+        "date": "01/01/2021\n", 
+        "description": "A good meal", 
+        "id": 3, 
+        "ingredients": "pasta, oil, tomato sauce", 
+        "name": "Pasta", 
+        "recipe": "Cook pasta, add tomato sauce, drizzle with oil", 
+        "tags": ["Dinner"], 
+        "user_id": 3
+    }, 
+    {
+        "date": "01/01/2021\n", 
+        "description": "Easy quick meal", 
+        "id": 4, 
+        "ingredients": "lettuce, tomatoes, ranch", 
+        "name": "Salad", 
+        "recipe": "Combine ingredients in a bowl and serve", 
+        "tags": ["Lunch", "Dinner", "Healthy"], 
+        "user_id": 3
+    }
+  ]
+}

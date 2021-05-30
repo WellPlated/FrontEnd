@@ -1,7 +1,6 @@
 .App {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -38,7 +37,9 @@ form:after {
   background-image: linear-gradient(to bottom right, #fadd6a, #ff526f);
 }
 
+
 form .form-inner {
+  
   position: relative;
   display: block;
   background-color: #FFF;
@@ -68,19 +69,31 @@ form .form-inner .form-group {
 }
 
 .form-inner .form-group:focus-within label {
-  color: #be2d59;
+  color: #FE4880;
 }
 
-form .form-inner .form-group input {
+form .tags {
   display:block;
   width: 100%;
   padding: 10px 15px;
   background-color: #F8F8F8;
   border-radius: 8px;
   transition: 0.4s;
+  font-size: 14px;
+}
+form .form-inner .form-group input, textarea, select {
+  display:block;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #F8F8F8;
+  border-radius: 8px;
+  transition: 0.4s;
+  resize: none;
+  border: 3px;
 }
 
-form .form-inner .form-group input:focus {
+
+form .form-inner .form-group textarea:focus, input:focus {
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -122,4 +135,37 @@ form .form-inner input[type="submit"]:hover {
 
 .error {
   padding: 20px;
+
+}
+
+a {
+  background-color: #f77d7d;
+  color: white;
+  padding: 1em 1em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+}
+
+a:hover {
+  background-image: linear-gradient(to right, #f7a36b 25%, #f58856 50%, #FE4880);
+} 
+
+a:active {
+  background-color: rgb(255, 106, 60);
+}
+
+.welcome {
+  width: 100%;
+  max-width: 480px;
+  background-color: #FFF;
+  padding: 15px 30px;
+}
+
+.welcome h2 {
+  color: #888;
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 30px;
 }
