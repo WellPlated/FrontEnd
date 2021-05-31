@@ -1,0 +1,60 @@
+.display-main{
+    text-align: center;
+    margin-left: 15%;
+  }
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.display-header {
+  background-color:#f8cbcb;
+  min-height: 9vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  font-family: 'Courier New', Courier, monospace;
+  color:  #bc5a45;
+  font-style: italic;
+  font-weight: bold;
+  
+}
+.recipe-name{ 
+  font-family: 'Courier New', Courier, monospace;
+  color: #ffffff;
+  font-size: 45px;
+}
+
+.display-content-background{
+  background-color: #282c34;
+  min-height: 110vh;
+}
+
+.submit-comment{
+    left: 10%;
+}
+
+.submit-comment-button{
+  color:whitesmoke;
+  font-size: 25px;
+  border: white;
+  border-width: 50px;
+}
+
+.display-content{
+  background-color: #282c34;
+  min-height: 110vh;
+  padding-left: 0%;
+  padding-right: 15%;
+  font-size: calc(10px + 2vmin);
+  color:  #ffffff;
+}
+
+.image{
+  width:600px;
+  height:600px;
+}

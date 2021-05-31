@@ -6,11 +6,13 @@ import { createBrowserHistory } from "history";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Components
 import Home from './views/Home/Home.js';
-import Login from './views/Login/Login'
+import Login from './views/Login/Login';
 import Profile from "./views/Profile/Profile";
 import SignUp from "./views/SignUp/SignUp";
 import SideNav from "./views/SideNav/SideNav";
 import Upload from "./views/Upload/Upload";
+import Display from "./views/Display/Display";
+import AboutUs from "./views/AboutUs/AboutUs";
 
 var hist = createBrowserHistory();
 
@@ -23,6 +25,9 @@ ReactDOM.render(
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Login" component={Login} />
         <Route path="/Upload" component={Upload} />
+        <Route path="/Display/:hash" component={Display} />
+        <Route path="/About" component={AboutUs} />
+        {/*<Route path="/recipees/:index" component={recipeDisplay}/>*/}
         <Route path="/" component={Home} />
       </Switch>
     </div>

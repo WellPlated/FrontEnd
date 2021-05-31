@@ -4,14 +4,21 @@ import { recipes } from "../../jsontest/db.json";
 import Grid from "@material-ui/core/Grid";
 // Components
 import Recipe from "./Recipe.js";
+import { Link } from 'react-router-dom';
 
 export default function RecipeCards(props) {
   return (
     <div className="recipes-container">
-      <Grid container>
+        <Grid container>
           {props.recipes.map((data) => {
             return (
               <Grid item xs={12} md={6} lg={3}>
+                <Link to={{
+                  pathname: `/Display/${data.hash}`,
+                  query: {
+                    info: JSON.stringify(data)
+                  }
+                }}></Link>
                 <Recipe
                   date={data.date}
                   recipe_id={data.id}
@@ -27,7 +34,7 @@ export default function RecipeCards(props) {
               </Grid>
             );
           })}
-      </Grid>
+        </Grid>
     </div>
   );
 };

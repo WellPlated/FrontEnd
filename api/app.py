@@ -38,7 +38,6 @@ def home():
 def api_all_orders():
     recipes = db.execute("SELECT * FROM recipes")
     for recipe in recipes:
-        # find_username = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])
         recipe["user"] = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])[0]["username"]
         del(recipe["user_id"])
         del(recipe["id"])
@@ -69,7 +68,6 @@ def api_signup():
             return {"status": 403, "message" : message}
 
         # make sure username is not a duplicate
-
         duplicate = db.execute("SELECT * FROM users WHERE username = :username", username=data['username'])
 
         if duplicate != []:
@@ -80,7 +78,6 @@ def api_signup():
             return {"status": 403, "message" : message}
 
         # hash the password before storing it
-
         db.execute("INSERT INTO users(username,password,email) VALUES('"+str(data['username'])+"','"+str(generate_password_hash(str(data['password'])).decode('utf8'))+"','"+str(data['email'])+"')")
  
         return { "status" : 200 }
@@ -92,7 +89,7 @@ def api_login():
       print(request)
       auth_user = authenticate_user(data['username'], str(data['password']))
       if auth_user:
-            token = tokenize(auth_user)
+            token = tokenize(auth_user) # generate token
             if type(token) is bytes:
                 token=token[2:-1]
             return {"status": 200, "access_token": str(token), "token_type": "bearer"}
@@ -107,12 +104,10 @@ def user_recipes():
     print("Printing data")
     print(data)
     try:
-        print("about to print token")
-        token=data['token']
-        print("printing token")
-        print(token)
 
-        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        token=data['token']
+
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"]) # decode token to extract user metadata
 
         response = {}
         response["status"] = 200
@@ -130,8 +125,11 @@ def api_upload():
         
         data = request.json
         token=data['user_id']
-        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-        userID = decoded['user_id']
+        try:
+            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            userID = decoded['user_id']
+        except:
+            return {"status": 403, "message": "Session expired. Please log in again."}
         
         message = 'success'
         # make sure no fields are blank
@@ -226,21 +224,37 @@ def delete_recipe():
         print(data)
         recipe_id = data['id']
 
-        db.execute("DELETE FROM recipes WHERE id=" + str(recipe_id))
+        db.execute("DELETE FROM recipes WHERE id=" + str(recipe_id)) # delete the post
         return {'status' : 'test'}
 
-@app.route('/comment', methods=['POST']) # info coming in: user_id, recipe_id, comment
+@app.route('/comment', methods=['POST'])
 def comment_on_recipe():
     if request.method == 'POST':
         data = request.json
-        recipe_id=data["recipe_id"]
-        user_id=data["user_id"]
         comment=data["comment"]
+        hashnum = data["hashnum"]
         print(data)
-        db.execute("INSERT INTO comments(user_id, recipe_id, comment) VALUES(:recipe_id, :user_id, :comment)", recipe_id=recipe_id, user_id=user_id, comment=comment)
+        # insert comment
+        db.execute("INSERT INTO comments(comment, recipe_hash) VALUES(:comment, :hashnum)", comment=comment, hashnum=hashnum)
         return {'status' : 'success'}
 
-def tokenize(user_data: dict) -> str:
+
+@app.route('/getcomments', methods=['POST'])
+def get_comments():
+    if request.method == 'POST':
+        data = request.json
+        hashnum = data["hashnum"]
+        try:
+            commentsdict = db.execute("SELECT * FROM comments WHERE recipe_hash=:hashnum", hashnum=hashnum)
+            comments = []
+            for element in commentsdict: # drop unnecessary columns
+                comments.append(element['comment'])
+            print(comments)
+            return {'status' : '200', 'comments' : comments}
+        except:
+            return {'status' : '403'}
+
+def tokenize(user_data: dict) -> str: # helper function to generate token
     return jwt.encode(
         {
             'user_id': user_data['id'],
@@ -250,20 +264,6 @@ def tokenize(user_data: dict) -> str:
         },
         SECRET_KEY,
         algorithm="HS256")
-
-def authenticate_user(username: str, password: str) -> dict:
-    existing_user = db.execute("SELECT * FROM users WHERE username="+"'"+username+"'")
-    print(existing_user)
-    try:
-        if existing_user and check_password_hash(existing_user[0]['password'],
-                                                password):
-            return user_helper(existing_user)
-        else:
-            return None
-    except:
-        return None
-
-app.run()
 
 @app.route('/like', methods=['POST']) 
 def like_recipe():
@@ -296,3 +296,17 @@ def recipe_getLikes():
                 final_return.append(recipe)
         print(final_return)
         return jsonify(final_return)
+
+def authenticate_user(username: str, password: str) -> dict: # helper function to check user's credentials
+    existing_user = db.execute("SELECT * FROM users WHERE username="+"'"+username+"'")
+    print(existing_user)
+    try:
+        if existing_user and check_password_hash(existing_user[0]['password'],
+                                                password):
+            return user_helper(existing_user)
+        else:
+            return None
+    except:
+        return None
+
+app.run()

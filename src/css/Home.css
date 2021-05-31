@@ -27,3 +27,12 @@
 .Home-link {
   color: #61dafb;
 }
+
+.Home-header h1 {
+  color: #ffffff;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  font-style: italic;
+  font-size: 60px;
+  font-weight: 5000;
+}

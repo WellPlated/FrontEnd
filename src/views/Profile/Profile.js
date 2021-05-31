@@ -22,11 +22,12 @@ function Profile() {
 
   useEffect (async () => {
 
+    // fetch recipes
     async function getMyRecipes() {
 
       console.log("Entered getMyRecipes")
 
-      if (!("token" in localStorage))
+      if (!("token" in localStorage)) // can't fetch recipes if a user is not logged in
       {
         return;
       }
@@ -52,7 +53,6 @@ function Profile() {
           })
           .catch(function(error){
             console.log(error);
-            //Perform action based on error
           });
     }
 
@@ -65,9 +65,9 @@ function Profile() {
   const classes = useStyles();
 
   
-  if (!("token" in localStorage)) // if DOM renders before data is fetched or if user is not logged in
+  if (!("token" in localStorage)) // if user is not logged in
   { return <div className="not-logged-in">Not logged in! Please log in to view recipes.</div> }
-  else if (Object.keys(myrecipes).length === 0) // if DOM renders before data is fetched or if user is not logged in
+  else if (Object.keys(myrecipes).length === 0) // if DOM renders before data is fetched
   { return <div className="not-logged-in">No recipes to display.</div> }
 
 
@@ -85,7 +85,7 @@ function Profile() {
           </Grid>
         </Grid>
       </header>
-  <div> { error } </div> { /* not sure if this line does anything */ }
+  <div> { error } </div>
       <header className="Profile-content-background">
         <header className="Profile-content">
 
@@ -94,7 +94,8 @@ function Profile() {
               <div className="headerProfilePage">My Recipes</div>
               <Grid container direction="row" justify="center" spacing={1}>
                 
-                { myrecipes.map( recipe => 
+                { // map each recipe to a recipe card
+                  myrecipes.map( recipe => 
                   <Grid item xs={5} md={3} className={classes.root} ><RecipeCard 
                     date={recipe["date"]} name ={recipe["name"]} description={recipe["description"]} id={recipe["id"]} refresh={() => setRefresh(!refresh)}/>
                   </Grid>)
