@@ -1,0 +1,88 @@
+
+ 
+.AboutUsPage {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ffffff;
+    margin-left: 15%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.aboutHeader {
+    /* background-color: #bc5a45; */
+    height:7%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.aboutHeader h2 {
+    color: #bc5a45;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-style: italic;
+    font-size: 40px;
+    font-weight: 5000;
+    padding-bottom: 10px;
+}
+
+.aboutParagraph {
+    height:7%;
+    padding-top: 10px;
+}
+.aboutParagraph h2 {
+    color: #bc5a45;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 800;
+    
+}
+.aboutParagraph p {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.aboutTeam {
+    height:7%;
+    padding-top: 20px;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.aboutTeam h2 {
+    color: #bc5a45;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 800;
+}
+.aboutTeam  p {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.title {
+    color:  #bc5a45;
+}
+
+.abouttest {
+    background-color: teal;
+}
+.h2 {
+    color: #000000,
+}
+
+.AboutUs {
+    background-color: violet;
+    width: 100%;
+    height: 100%;
+}
