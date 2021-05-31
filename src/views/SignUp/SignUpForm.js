@@ -9,7 +9,7 @@ function SignUpForm({ SignUp, error, onSubmit }) {
 
     const submitHandler = e => {
         e.preventDefault();
-
+        // register a user (signup)
         axios.post('http://127.0.0.1:5000/signup', {
             email : details.email,
             username : details.name,
@@ -37,7 +37,6 @@ function SignUpForm({ SignUp, error, onSubmit }) {
         <form onSubmit={submitHandler}>
             <div className="form-inner">
                 <h2>Enter information</h2>
-                { /* Error */}
                 <div className="form-group">
                     <label htmlFor="email">Email: </label>
                     <input type="text" name="email" id="email" 

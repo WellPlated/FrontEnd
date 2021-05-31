@@ -14,18 +14,17 @@ export default function Display(props) {
 
   useEffect (async () => {
     
+    // fetch comments
     async function getComments() {
       axios.post('http://127.0.0.1:5000/getcomments', { 
         hashnum : info["hash"],
       })
       .then(function(response) {
         console.log(response);
-        //if (response["data"]["status"] === 200) {
-          console.log("Printing comments")
-          console.log(response["data"]["comments"]);
-          setComments(response["data"]["comments"]);
-          console.log(Comments);
-        //}
+        console.log("Printing comments")
+        console.log(response["data"]["comments"]);
+        setComments(response["data"]["comments"]);
+        console.log(Comments);
       })
       .catch(function(error) {
         console.log(error);
@@ -146,7 +145,7 @@ export default function Display(props) {
               </Grid>
             </Grid>
               <ul>
-                {
+                { // display comments
                   (Comments === undefined) ? <div></div> :
                   (Comments.map( comment => <li key={comment}>{comment}</li>))
                 }

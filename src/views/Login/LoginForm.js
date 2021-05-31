@@ -8,7 +8,7 @@ function LoginForm({ Login, error, onSubmit }) {
 
     const submitHandler = e => {
         e.preventDefault();
-
+        // log in user
         axios.post('http://127.0.0.1:5000/login', {
             username : details.name,
             password : details.password
@@ -18,7 +18,7 @@ function LoginForm({ Login, error, onSubmit }) {
                 if (response['data']['status'] === 200) {
                     Login(details);
                     onSubmit()
-                    localStorage.setItem("token", response['data']['access_token'])
+                    localStorage.setItem("token", response['data']['access_token']) // store token in local storage
                     console.log(localStorage.getItem("token"))
                 }
                 else if (response['data']['status'] === 403) {
@@ -27,7 +27,6 @@ function LoginForm({ Login, error, onSubmit }) {
         })
         .catch(function(error){
             console.log(error);
-       //Perform action based on error
         });
     }
 
@@ -35,7 +34,6 @@ function LoginForm({ Login, error, onSubmit }) {
         <form onSubmit={submitHandler}>
             <div className="form-inner">
                 <h2>Welcome!</h2>
-                { /* Error */}
                 <div className="form-group">
                     <label htmlFor="name">Username: </label>
                     <input type="text" name="name" id="name" 
