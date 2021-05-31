@@ -108,16 +108,18 @@ def user_recipes():
         token=data['token']
 
         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"]) # decode token to extract user metadata
+    except:
+        return {"status": 403, "message": "Session expired. Log in again!"}
 
+    try:
         response = {}
         response["status"] = 200
         response["recipes"] = db.execute("SELECT * FROM recipes WHERE user_id=:id", id=decoded['user_id'])
         print(response)
         
         return jsonify(response)
-    
     except:
-        return {"status": 403, "message": "no user logged in"}
+        return {"status": 403, "message": "Unable to get recipes"}
     
 @app.route('/upload', methods=['POST'])
 def api_upload():
