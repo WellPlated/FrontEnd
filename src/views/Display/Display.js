@@ -2,16 +2,46 @@ import React from 'react';
 // @material-ui components
 import Grid from "@material-ui/core/Grid";
 import '../../css/Display.css';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
 
 
 export default function Display(props) {
+
+  const [Comments, setComments] = useState([]);
+
+  useEffect (async () => {
+    
+    async function getComments() {
+      axios.post('http://127.0.0.1:5000/getcomments', { 
+        hashnum : info["hash"],
+      })
+      .then(function(response) {
+        console.log(response);
+        //if (response["data"]["status"] === 200) {
+          console.log("Printing comments")
+          console.log(response["data"]["comments"]);
+          setComments(response["data"]["comments"]);
+          console.log(Comments);
+        //}
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    }
+
+    if (info) {
+      getComments();
+    }
+
+  }, []);
+
+
   let info = undefined;
   const comment = React.useRef(null);
-     //Need to submit comment to database later
+     //submit comment to database
     const handleSubmit = e => {
       console.log("Comment added: " + comment.current.value);
       e.preventDefault();
@@ -115,8 +145,11 @@ export default function Display(props) {
                 <button onClick={handleSubmit} type="submit" className="submit-comment-button">Post!</button>
               </Grid>
             </Grid>
-               
-                {/*~~NEED to display comments after retrieving from database~~*/}
+              <ul>
+                {
+                  Comments.map( comment => <li key={comment}>{comment}</li>)
+                }
+              </ul>
 
           </header>
         </header> 
