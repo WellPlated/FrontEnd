@@ -130,8 +130,11 @@ def api_upload():
         
         data = request.json
         token=data['user_id']
-        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-        userID = decoded['user_id']
+        try:
+            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            userID = decoded['user_id']
+        except:
+            return {"status": 403, "message": "Session expired. Please log in again."}
         
         message = 'success'
         # make sure no fields are blank
@@ -230,7 +233,7 @@ def delete_recipe():
         db.execute("DELETE FROM recipes WHERE id=" + str(recipe_id))
         return {'status' : 'test'}
 
-@app.route('/comment', methods=['POST']) # info coming in: user_id, recipe_id, comment
+@app.route('/comment', methods=['POST'])
 def comment_on_recipe():
     if request.method == 'POST':
         data = request.json
@@ -239,6 +242,22 @@ def comment_on_recipe():
         print(data)
         db.execute("INSERT INTO comments(comment, recipe_hash) VALUES(:comment, :hashnum)", comment=comment, hashnum=hashnum)
         return {'status' : 'success'}
+
+
+@app.route('/getcomments', methods=['POST'])
+def get_comments():
+    if request.method == 'POST':
+        data = request.json
+        hashnum = data["hashnum"]
+        try:
+            commentsdict = db.execute("SELECT * FROM comments WHERE recipe_hash=:hashnum", hashnum=hashnum)
+            comments = []
+            for element in commentsdict:
+                comments.append(element['comment'])
+            print(comments)
+            return {'status' : '200', 'comments' : comments}
+        except:
+            return {'status' : '403'}
 
 def tokenize(user_data: dict) -> str:
     return jwt.encode(
