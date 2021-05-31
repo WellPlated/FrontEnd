@@ -4,28 +4,36 @@ import { recipes } from "../../jsontest/db.json";
 import Grid from "@material-ui/core/Grid";
 // Components
 import Recipe from "./Recipe.js";
+import { Link } from 'react-router-dom';
 
 export default function RecipeCards(props) {
   return (
     <div className="recipes-container">
-      <Grid container>
+        <Grid container>
           {props.recipes.map((data) => {
             return (
-            <Grid item xs={12} md={6} lg={3}>
-              <Recipe
-                date={data.date}
-                id={data.id}
-                description={data.description}
-                ingredient={data.ingredients}
-                title={data.title}
-                recipe={data.recipe}
-                tags={data.tags}
-                user={data.user}
-              />
-            </Grid>
+              <Grid item xs={12} md={6} lg={3} >
+                <Link to={{
+                  pathname: `/Display/${data.hash}`,
+                  query: {
+                    info: JSON.stringify(data)
+                  }
+                }}>
+                  <Recipe
+                    date={data.date}
+                    id={data.id}
+                    description={data.description}
+                    ingredient={data.ingredients}
+                    name={data.name}
+                    recipe={data.recipe}
+                    tags={data.tags}
+                    user={data.user}
+                  />
+                </Link>
+              </Grid>
             );
           })}
-      </Grid>
+        </Grid>
     </div>
   );
 };
