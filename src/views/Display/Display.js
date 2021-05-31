@@ -2,6 +2,8 @@ import React from 'react';
 // @material-ui components
 import Grid from "@material-ui/core/Grid";
 import '../../css/Display.css';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -11,19 +13,31 @@ export default function Display(props) {
   const comment = React.useRef(null);
      //Need to submit comment to database later
     const handleSubmit = e => {
-    console.log("Comment added: " + comment.current.value);
-    e.preventDefault();
+      console.log("Comment added: " + comment.current.value);
+      e.preventDefault();
+      axios.post('http://127.0.0.1:5000/comment', {
+            comment : comment.current.value,
+            hashnum : info["hash"],
+        })
+            .then(function(response){
+                console.log(response);
+        })
+        .catch(function(error){
+            console.log(error);
+        });
     }
   
   //Accessing through direct url, e.g. shared links (no query passed, have to use local storage from Home.js)
   if (!props.location.hasOwnProperty('query')){
     const recipes = JSON.parse(localStorage.getItem("recipes"));
-    recipes.forEach(element => {
-      if (element.hash === parseInt(props.match.params.hash)){
-        info = element;
-        return;
-      }
-    });
+    if (recipes) {
+      recipes.forEach(element => {
+        if (element.hash === parseInt(props.match.params.hash)){
+          info = element;
+          return;
+        }
+      });
+    }
   }
 
   //Accessing through Kitchen Cache/My Profile (query passed)
