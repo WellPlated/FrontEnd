@@ -24,16 +24,22 @@ const tags = [
   "Vegan",
   "Keto",
   "Paleo",
-  "Italian",
-  "Chinese",
-  "French",
-  "Mexican",
   "Nut-Free",
   "Dairy-Free",
   "Breakfast",
   "Lunch",
   "Dinner",
   "Drinks"
+];
+
+const cuisines = [
+  "Chinese", 
+  "Italian", 
+  "French", 
+  "Mexican",
+  "American",
+  "Drinks",
+  
 ];
 
 export default function FilterBoxes(props) {
@@ -67,6 +73,7 @@ export default function FilterBoxes(props) {
                   name={value}
                 />
               }
+              key={value}
               label={value}
             />
           ))}

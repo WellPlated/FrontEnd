@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import clsx from 'clsx';
@@ -49,35 +49,69 @@ const useStyles = makeStyles((theme) => ({
   },
   tag: {
     margin: theme.spacing(0.5)
-  }
+  },
 }));
 
 export default function Recipe(props) {
   const classes = useStyles();
+  const [tags, setTags] = useState([]);
+  const [liked, setLiked] = useState(false);
 
-  console.log("RECIPE CARD")
-  console.log(props.date)
+  useEffect(() => {
+    retrieveTags(props.recipe_id);
+  }, []); 
+  // empty array acts as componentDidMount (runs once)
+
+  // console.log("RECIPE CARD")
+  // console.log(props.date)
 
   const deleteRecipe = (id, refresh) => {
     console.log("Will delete the recipe with this description: " + id);
-    axios.post('http://127.0.0.1:5000/delete', {
-            id: id
-        })
-
-        .then (function(response) {
-          // refresh the profile page
-          refresh()
-          console.log(response);
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
+    axios.post("http://127.0.0.1:5000/delete", {
+        id: id
+    })
+    .then ((response) => {
+      // refresh the profile page
+      refresh()
+      console.log(response);
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
   }
 
   const likeRecipe = (id) => {
+    console.log("Will like this recipe: " + id);
+    axios
+      .post("http://127.0.0.1:5000/delete", {
+        id: id,
+      })
+      .then((response) => {
+        setLiked(!liked);
 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
-    
+  const retrieveTags = (recipe_id) => {
+    console.log("Getting tags for recipe with id: " + recipe_id);
+    axios
+      .get("http://127.0.0.1:5000/recipes/gettags?recipe_id=" + recipe_id)
+      .then((response) => {
+        if (response["data"]["status"] === 200) {
+          console.log("tags: ");
+          console.log(response);
+          setTags(response.data.tags);
+        } else if (response["data"]["status"] === 403) {
+          alert("Failed to fetch tags data");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        //Perform action based on error
+      });
   }
 
   return (
@@ -90,9 +124,16 @@ export default function Recipe(props) {
             </Avatar>
           }
           action={
-            <IconButton aria-label="trash" onClick={() => deleteRecipe(props.id, props.refresh)}>
-              <DeleteIcon />
-            </IconButton>
+            props.deletable ? (
+              <IconButton
+                aria-label="trash"
+                onClick={() => deleteRecipe(props.id, props.refresh)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            ) : (
+              <></>
+            )
           }
           title={props.title}
           subheader={props.date}
@@ -108,20 +149,24 @@ export default function Recipe(props) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton
+            color={liked ? "secondary" : "default"}
+            aria-label="add to liked recipes"
+            onClick={() => likeRecipe(props.id)}
+          >
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
           <div className={classes.tags}>
-            {/* {props.tags.map((value) => (
-              <Chip className={classes.tag} variant="default" size="small" label={value}/>
-            ))} */}
+            {tags.map( tag => (
+              <Chip className={classes.tag} variant="default" size="small" label={tag}/>
+            ))}
           </div>
         </CardActions>
-        </Card>
-      </div>
+      </Card>
+    </div>
   );
 }
 
@@ -132,6 +177,5 @@ Recipe.propTypes = {
   ingredients: PropTypes.string,
   name: PropTypes.string,
   recipe: PropTypes.string,
-  tags: PropTypes.arrayOf(PropTypes.string),
   user_id: PropTypes.number
 };
