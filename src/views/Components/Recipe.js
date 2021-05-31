@@ -160,7 +160,7 @@ export default function Recipe(props) {
             <ShareIcon />
           </IconButton>
           <div className={classes.tags}>
-            {tags.map( tag => (
+            {tags.map( (tag) => (
               <Chip className={classes.tag} variant="default" size="small" label={tag}/>
             ))}
           </div>
