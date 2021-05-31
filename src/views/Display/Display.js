@@ -147,7 +147,8 @@ export default function Display(props) {
             </Grid>
               <ul>
                 {
-                  Comments.map( comment => <li key={comment}>{comment}</li>)
+                  (Comments === undefined) ? <div></div> :
+                  (Comments.map( comment => <li key={comment}>{comment}</li>))
                 }
               </ul>
 
