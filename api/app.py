@@ -98,6 +98,16 @@ def api_login():
 
 #[2:-1]
 
+@app.route('/recipe', methods=["POST"])
+def get_recipe():
+    if requeest.method = 'POST':
+        data = request.json
+        
+        recipe = db.execute('SELECT * FROM recipes WHERE hash=:hashnum', hashnum=data["hashnum"])
+
+        return {"status" : 200, "recipe" : recipe}
+
+
 @app.route('/recipes/user', methods=['POST'])
 def user_recipes():
     data=request.json
