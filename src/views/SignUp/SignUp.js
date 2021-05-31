@@ -26,7 +26,7 @@ function SignUp() {
   let history = useHistory()
 
   const handleOnSubmit = () => {
-    window.location = '/Profile';;
+    window.location = '/';;
   }
 
   return (

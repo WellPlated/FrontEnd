@@ -55,7 +55,7 @@ export default function Home() {
       <header className="Home-header">
         <Grid container spacing={5}>
           <Grid item xs={12}>
-            <h1>Kitchen Cache</h1>
+            <h1>Our Kitchen</h1>
           </Grid>
           <Grid container item xs={12} spacing={3} justify="flex-end">
             <Grid item xs={3}>
@@ -66,7 +66,7 @@ export default function Home() {
                 <div style={{ display: 'flex', height: '300px', justifyContent: 'center', alignItems: 'center' }}>
                     <h2>No posts yet...</h2>
                 </div> :
-                <RecipeCards recipes={Recipes} />
+                <RecipeCards recipes={Recipes} deletable={false} />
               }
             </Grid>
           </Grid>

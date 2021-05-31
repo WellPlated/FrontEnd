@@ -26,16 +26,16 @@
 .recipe-name{ 
   font-family: 'Courier New', Courier, monospace;
   color: #ffffff;
-  font-size: 45px;
+  font-size: 50px;
 }
 
 .display-content-background{
-  background-color: #282c34;
+  background-color: #f8cbcb;
   min-height: 110vh;
 }
 
 .submit-comment{
-    left: 10%;
+    left: 5%;
 }
 
 .submit-comment-button{
@@ -46,7 +46,7 @@
 }
 
 .display-content{
-  background-color: #282c34;
+  background-color: #f8cbcb;
   min-height: 110vh;
   padding-left: 0%;
   padding-right: 15%;

@@ -9,6 +9,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Fragment } from "react";
+import '../../css/Home.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,16 +25,22 @@ const tags = [
   "Vegan",
   "Keto",
   "Paleo",
-  "Italian",
-  "Chinese",
-  "French",
-  "Mexican",
   "Nut-Free",
   "Dairy-Free",
   "Breakfast",
   "Lunch",
   "Dinner",
   "Drinks"
+];
+
+const cuisines = [
+  "Chinese", 
+  "Italian", 
+  "French", 
+  "Mexican",
+  "American",
+  "Drinks",
+  
 ];
 
 export default function FilterBoxes(props) {
@@ -67,6 +74,7 @@ export default function FilterBoxes(props) {
                   name={value}
                 />
               }
+              key={value}
               label={value}
             />
           ))}

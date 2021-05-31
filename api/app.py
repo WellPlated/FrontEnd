@@ -205,7 +205,6 @@ def api_getfilter():
                 # find_username = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])
                 recipe["user"] = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])[0]["username"]
                 del(recipe["user_id"])
-                del(recipe["id"])
                 # recipes.append({"status":200})
             return jsonify(recipes)
         for i in range(0,len(data['tags'])):

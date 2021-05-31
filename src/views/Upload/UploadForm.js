@@ -120,7 +120,7 @@ function UploadForm({ Upload, error, onSubmit }) {
                         <option value="Breakfast">Breakfast</option>
                         <option value="Lunch">Lunch</option>
                         <option value="Dinner">Dinner</option>
-                        <option value="Drinks/Beverages">Drinks/Beverages</option>
+                        <option value="Drinks">Drinks/Beverages</option>
                     </select>
                     
                     
