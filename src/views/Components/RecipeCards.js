@@ -7,10 +7,9 @@ import Recipe from "./Recipe.js";
 import { Link } from 'react-router-dom';
 
 export default function RecipeCards(props) {
-
   return (
     <div className="recipes-container">
-        <Grid container zeroMinWidth alignItems="center">
+        <Grid container>
           {props.recipes.map((data) => {
             return (
               <Grid item xs={12} md={6} lg={3} >
