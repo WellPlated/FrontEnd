@@ -10,7 +10,7 @@
 }
 
 .Profile-header {
-  background-color:#ffffff ;
+  background-color:#f8cbcb ;
   min-height: 9vh;
   display: flex;
   flex-direction: column;
@@ -44,12 +44,12 @@
 }
 
 .Profile-content-background{
-  background-color: #ffffff;
+  background-color: #f8cbcb;
   min-height: 100vh;
 }
 
 .Profile-content{
-  background-color: #ffffff;
+  background-color: #f8cbcb;
   min-height: 100vh;
   padding-left: 5%;
   padding-right: 5%;
