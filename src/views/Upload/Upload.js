@@ -29,11 +29,19 @@ function Upload() {
   }
 
   return (
-    <div className="App">  
-      <div>
-        <UploadForm Upload={Upload} error={Error} onSubmit={handleOnSubmit}/>
-        <div className="error">{error}</div>
-      </div>
+    <div className="App">
+      {/* { ("recipe" in localStorage) ? (
+        <div className="welcome">
+          <h2>Recipe Posted!</h2>
+          <button onClick={NewUpload}>Upload a New Recipe!</button>
+          </div>
+      ) : ( */}
+        <div>
+          <UploadForm Upload={Upload} error={Error} onSubmit={handleOnSubmit}/>
+          <div className="error">{error}</div>
+        </div>
+      {/* )}   */}
+      
     </div>
   );
 }
