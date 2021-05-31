@@ -9,6 +9,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Fragment } from "react";
+import '../../css/Home.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
