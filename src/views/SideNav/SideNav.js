@@ -8,7 +8,7 @@ const SideNav = (props) => {
       <a href="/Profile">View Profile</a>
       <a href="/Login">Login</a>
       <a href="/Upload">Upload</a>
-      <a href="#section">About Us</a>
+      <a href="/About">About Us</a>
     </div>
   );
 };

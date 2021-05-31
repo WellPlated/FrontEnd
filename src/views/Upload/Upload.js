@@ -12,6 +12,7 @@ function Upload() {
     
     console.log("uploading");
     localStorage.setItem("recipe", "exists");
+    Error("Recipe Posted!")
   }
 
   const NewUpload = () => {

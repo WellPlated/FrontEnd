@@ -130,8 +130,13 @@ def api_upload():
         
         data = request.json
         token=data['user_id']
-        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-        userID = decoded['user_id']
+        try :
+            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            userID = decoded['user_id']
+        except:
+            message = "Login has expired, please log in again!"
+        
+        
         
         message = 'success'
         # make sure no fields are blank
