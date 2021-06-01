@@ -31,18 +31,14 @@ function Upload() {
 
   return (
     <div className="App">
-      {/* { ("recipe" in localStorage) ? (
-        <div className="welcome">
-          <h2>Recipe Posted!</h2>
-          <button onClick={NewUpload}>Upload a New Recipe!</button>
-          </div>
-      ) : ( */}
+      { (!("token" in localStorage)) ? (  // if user is not logged in
+        <div className="not-logged-in">Not logged in! Please log in to upload a recipe.</div>
+      ) : (
         <div>
           <UploadForm Upload={Upload} error={Error} onSubmit={handleOnSubmit}/>
           <div className="error">{error}</div>
         </div>
-      {/* )}   */}
-      
+       )}
     </div>
   );
 }
