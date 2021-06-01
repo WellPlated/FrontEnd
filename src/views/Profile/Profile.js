@@ -45,7 +45,7 @@ function Profile() {
               console.log(myrecipes.length)
             }
             else if (response['data']['status'] === 403) {
-              setError("Unable to get my recipes")
+              setError(response['data']['message'])
               console.log("Unable to get my recipes")
           }
             
@@ -67,7 +67,9 @@ function Profile() {
   
   if (!("token" in localStorage)) // if user is not logged in
   { return <div className="not-logged-in">Not logged in! Please log in to view recipes.</div> }
-  else if (Object.keys(myrecipes).length === 0) // if DOM renders before data is fetched
+  else if (error != "") //display other errors from the backend
+  { return <div className="not-logged-in">{ error }</div> }
+  else if (Object.keys(myrecipes).length === 0) // if DOM renders before data is fetched or if user is not logged in
   { return <div className="not-logged-in">No recipes to display.</div> }
 
 
