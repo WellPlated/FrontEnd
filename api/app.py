@@ -138,13 +138,13 @@ def user_recipes():
         return {"status": 403, "message": "Unable to get recipes"}
     
 @app.route('/upload', methods=['POST'])
-def api_upload():
+def api_upload(): # ENDPOINT to post a recipe
     if(request.method=='POST'):
         
         data = request.json
         token=data['user_id']
         try:
-            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"]) #decode user id from the token provided by the front end
             userID = decoded['user_id']
         except:
             return {"status": 403, "message": "Session expired. Please log in again."}
@@ -160,30 +160,32 @@ def api_upload():
         elif data['recipe'] == '':
             message = "No steps given. Try again"
 
-
+        #check if a recipe already exists
         check = db.execute("SELECT * from recipes WHERE user_id=:user_id and description=:descript and date=:date and title=:title", user_id=userID, descript=data['description'], date=data['date'], title= data['title'])
 
         if check != []:
             message = "Recipe already exists!"
 
-        if message != 'success':
+        if message != 'success': #if the message changed that means something went wrong and we return that
             print(message)
             return {"status": 403, "message" : message}
 
-        uniqueHash = randint(100000, 999999)
+        uniqueHash = randint(100000, 999999) #create a unique hash for the recipe
         hashCheck = db.execute("SELECT * from recipes where hash=:currHash", currHash=uniqueHash)
         while(hashCheck != []):
             uniqueHash = randint(100000, 999999)
             hashCheck = db.execute("SELECT * from recipes where hash=:currHash", currHash=uniqueHash)
 
         
+        #Post the recipe into the database
         db.execute("INSERT INTO recipes(user_id, title ,date, description, ingredients, recipe, cuisine, hash) \
             VALUES("+str(userID)+", '"+str(data['title'])+"','"+str(data['date'])+"','"+str(data['description'])+"','"+str(data['ingredients'])+"',\
                   '"+str(data['recipe'])+"', '"+str(data['cuisine'])+"', "+str(uniqueHash)+")")
         
-        
+        #get back the recipe id that we just put in
         recipeID = db.execute("SELECT id from recipes WHERE user_id=:user_id and description=:descript and date=:date and title=:title", user_id=userID, descript=data['description'], date=data['date'], title= data['title'])
        
+        #put tags in for the recipe
         for tag in data['tags']:
             db.execute("INSERT INTO tags(recipe_id,tag) VALUES("+str(recipeID[0]['id'])+","+"'"+str(tag)+"'"+")")
 

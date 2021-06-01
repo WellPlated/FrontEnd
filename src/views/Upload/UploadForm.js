@@ -108,19 +108,23 @@ function UploadForm({ Upload, error, onSubmit }) {
                     <label htmlFor="tags">Select All Tags that Apply: </label>
                     <select multiple={true} name="tags" id="tags" 
                     onChange={handleChange} value={details.tags}>
+                        <option value="Chinese">Chinese</option>
+                        <option value="French">French</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Italian">Italian</option>
+                        <option value="American">American</option>
                         <option value="Vegetarian">Vegetarian</option>
                         <option value="Vegan">Vegan</option>
                         <option value="Keto">Keto</option>
                         <option value="Paleo">Paleo</option>
-                        <option value="Chinese">Chinese</option>
-                        <option value="French">French</option>
-                        <option value="Mexican">Mexican</option>
                         <option value="Nut-Free">Nut-Free</option>
                         <option value="Dairy-Free">Dairy-Free</option>
                         <option value="Breakfast">Breakfast</option>
                         <option value="Lunch">Lunch</option>
                         <option value="Dinner">Dinner</option>
                         <option value="Drinks">Drinks/Beverages</option>
+                        
+                    
                     </select>
                     
                     

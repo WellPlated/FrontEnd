@@ -26,7 +26,7 @@ function Upload() {
   }
   
   const handleOnSubmit = () => {
-    //window.location = '/Profile';
+    window.location = '/Confirmation';
   }
 
   return (
