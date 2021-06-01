@@ -79,8 +79,14 @@ def api_signup():
 
         # hash the password before storing it
         db.execute("INSERT INTO users(username,password,email) VALUES('"+str(data['username'])+"','"+str(generate_password_hash(str(data['password'])).decode('utf8'))+"','"+str(data['email'])+"')")
+
+        # login the user
+        auth_user = authenticate_user(data['username'], str(data['password']))
+        token = tokenize(auth_user) # generate token
+        if type(token) is bytes:
+            token=token[2:-1]
  
-        return { "status" : 200 }
+        return { "status" : 200, "token" : token }
 
 @app.route('/login', methods=['GET', 'POST'])
 def api_login():
@@ -98,6 +104,16 @@ def api_login():
 
 #[2:-1]
 
+@app.route('/recipe', methods=["POST"])
+def get_recipe():
+    if request.method == 'POST':
+        data = request.json
+        
+        recipe = db.execute('SELECT * FROM recipes WHERE hash=:hashnum', hashnum=data["hashnum"])
+
+        return {"status" : 200, "recipe" : recipe}
+
+
 @app.route('/recipes/user', methods=['POST'])
 def user_recipes():
     data=request.json
@@ -108,16 +124,18 @@ def user_recipes():
         token=data['token']
 
         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"]) # decode token to extract user metadata
+    except:
+        return {"status": 403, "message": "Session expired. Log in again!"}
 
+    try:
         response = {}
         response["status"] = 200
         response["recipes"] = db.execute("SELECT * FROM recipes WHERE user_id=:id", id=decoded['user_id'])
         print(response)
         
         return jsonify(response)
-    
     except:
-        return {"status": 403, "message": "no user logged in"}
+        return {"status": 403, "message": "Unable to get recipes"}
     
 @app.route('/upload', methods=['POST'])
 def api_upload():

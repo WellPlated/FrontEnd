@@ -11,6 +11,7 @@ import axios from 'axios';
 export default function Display(props) {
 
   const [Comments, setComments] = useState([]);
+  const [Confirmation, setConfirmation] = useState("");
 
   useEffect (async () => {
     
@@ -50,6 +51,7 @@ export default function Display(props) {
         })
             .then(function(response){
                 console.log(response);
+                setConfirmation("Added comment!");
         })
         .catch(function(error){
             console.log(error);
@@ -142,6 +144,7 @@ export default function Display(props) {
               </Grid>
               <Grid item xs={9}>
                 <button onClick={handleSubmit} type="submit" className="submit-comment-button">Post!</button>
+                <div>{Confirmation /* confirms that comment was submitted */}</div>
               </Grid>
             </Grid>
               <ul>
