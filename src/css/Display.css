@@ -1,6 +1,9 @@
 .display-main{
     text-align: center;
     margin-left: 15%;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #f8cbcb;
   }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -8,12 +11,27 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.aboutHeader {
+  /* background-color: #bc5a45; */
+  height:7%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.aboutHeader h2 {
+  color: #bc5a45;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  font-style: italic;
+  font-size: 40px;
+  font-weight: 5000;
+  padding-bottom: 10px;
+}
 
 .display-header {
   background-color:#f8cbcb;
   min-height: 9vh;
   display: flex;
-  flex-direction: column;
+  
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -23,15 +41,14 @@
   font-weight: bold;
   
 }
-.recipe-name{ 
-  font-family: 'Courier New', Courier, monospace;
-  color: #ffffff;
-  font-size: 50px;
-}
+
 
 .display-content-background{
   background-color: #f8cbcb;
+  display: flex;
   min-height: 110vh;
+  align-items: center;
+  justify-content: center;
 }
 
 .submit-comment{
@@ -48,13 +65,19 @@
 .display-content{
   background-color: #f8cbcb;
   min-height: 110vh;
-  padding-left: 0%;
-  padding-right: 15%;
   font-size: calc(10px + 2vmin);
   color:  #ffffff;
 }
 
+.recipeInfo {
+  font-style: italic;
+}
+
+.recipeGrid {
+  align-items: center;
+  justify-content: center;
+}
 .image{
-  width:600px;
-  height:600px;
+  width:550px;
+  height:550px;
 }

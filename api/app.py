@@ -159,6 +159,8 @@ def api_upload(): # ENDPOINT to post a recipe
             message = "No ingredients given. Try again"
         elif data['recipe'] == '':
             message = "No steps given. Try again"
+        elif data['cuisine'] == 'choose':
+            message = "Please choose a cuisine. Try again"
 
         #check if a recipe already exists
         check = db.execute("SELECT * from recipes WHERE user_id=:user_id and description=:descript and date=:date and title=:title", user_id=userID, descript=data['description'], date=data['date'], title= data['title'])

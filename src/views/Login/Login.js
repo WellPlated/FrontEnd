@@ -29,8 +29,8 @@ function Login() {
 
   let history = useHistory()
 
-  const handleOnSubmit = () => { //change to home page on success
-    window.location = '/';
+  const handleOnSubmit = () => { //change to profile page on success
+    window.location = '/Profile';
   }
 
   return (

@@ -75,6 +75,7 @@ function UploadForm({ Upload, error, onSubmit }) {
                     <label htmlFor="cuisine">Recipe Cuisine: </label>
                     <select type="text" name="cuisine" id="cuisine" 
                     onChange={e => setDetails({...details, cuisine: e.target.value})} value={details.cuisine}>
+                        <option value="choose">Please Choose a Cuisine</option>
                         <option value="American">American</option>
                         <option value="Italian">Italian</option>
                         <option value="Thai">Thai</option>
@@ -85,7 +86,7 @@ function UploadForm({ Upload, error, onSubmit }) {
                         <option value="French">French</option>
                         <option value="Greek">Greek</option>
                         <option value="Japanese">Japanese</option>
-                        <option value="Drinks/Beverages">Drinks/Beverages</option>
+                        <option value="Drinks">Drinks/Beverages</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>

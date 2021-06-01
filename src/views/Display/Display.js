@@ -82,53 +82,54 @@ export default function Display(props) {
   }
    
     let cuisine = info.cuisine;
+    console.log("cuisine" + cuisine);
     if (info.cuisine === "Drinks/Bevs"){
       cuisine = "Drinks";
+    }else if(info.cuisine === ""){
+      cuisine = "American";
     }
     const image = require('../../img/' + cuisine + '.jpg');
 
     return (
       <div className="display-main">
         <header className="display-header">
-          <Grid container direction="row" justify='center' spacing={1}>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={9}>
-              <b className="recipe-name">~{info.title}~</b>
-            </Grid>
-            <Grid item xs={1}>
-            </Grid>
-          </Grid>
+          
+            <div className="recipeHeader">
+              <h2>~{info.title}~</h2>
+            </div>
+              
+           
         </header>
       
         <header className="display-content-background">
           <header className="display-content">
-            <Grid container direction="column" justify="space-between" spacing={3}>
-              <Grid container direction="row" spacing={9}>
-                <Grid item xs={5}>
+            <Grid className="recipeGrid" container direction="column" spacing={3}>
+              <Grid container direction="row" spacing={10}>
+                <Grid item xs={12} md={6}>
                     <img className="image" src={image.default}/>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={12} md={6}>
                     <Grid container direction="column" justify="space-between" spacing={5}>
                         <Grid item xs={9}>
-                            <div><b>Chef: </b> {info.user}</div>
+                            <div className="recipeInfo"><b>Chef: </b> {info.user}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div><b>Date Uploaded: </b> {info.date}</div>
+                            <div className="recipeInfo"><b>Date Uploaded: </b> {info.date}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div><b>Cuisine: </b> {info.cuisine}</div>
+                            <div className="recipeInfo"><b>Cuisine: </b> {info.cuisine}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div><b>Description:</b> {info.description}</div>
+                            <div className="recipeInfo"><b>Description:</b> {info.description}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div><b>Ingredients:</b> {info.ingredients}</div>
+                            <div className="recipeInfo"><b>Ingredients:</b> {info.ingredients}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div><b>Recipe:</b> {info.recipe}</div>
+                            <div className="recipeInfo"><b>Recipe:</b> {info.recipe}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div><b>Tags:</b> {info.tags}</div>
+                            <div className="recipeInfo"><b>Tags:</b> {info.tags}</div>
                         </Grid>
                     </Grid>
                 </Grid>
