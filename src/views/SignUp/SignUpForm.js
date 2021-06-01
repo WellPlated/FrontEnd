@@ -22,7 +22,7 @@ function SignUpForm({ SignUp, error, onSubmit }) {
                 console.log("Sign up was successful!")
                 onSubmit()
                 SignUp(details)
-                // Automatically log in the user
+                // automatically log in the user
             }
             else if (response['data']['status'] === 403) {
                 error(response['data']['message'])
@@ -33,7 +33,7 @@ function SignUpForm({ SignUp, error, onSubmit }) {
         });
     }
 
-    return (
+    return ( //set up sign up form entries, set details on change
         <form onSubmit={submitHandler}>
             <div className="form-inner">
                 <h2>Enter information</h2>

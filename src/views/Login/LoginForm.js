@@ -6,7 +6,7 @@ import '../../css/Login.css';
 function LoginForm({ Login, error, onSubmit }) {
     const [details, setDetails] = useState({name: "", password: ""});
 
-    const submitHandler = e => {
+    const submitHandler = e => { //called on submit, posts to backend 
         e.preventDefault();
         // log in user
         axios.post('http://127.0.0.1:5000/login', {
@@ -30,9 +30,9 @@ function LoginForm({ Login, error, onSubmit }) {
         });
     }
 
-    return (
-        <form onSubmit={submitHandler}>
-            <div className="form-inner">
+    return ( //set up entries for form, set details on change
+        <form onSubmit={submitHandler}> 
+            <div className="form-inner"> 
                 <h2>Welcome!</h2>
                 <div className="form-group">
                     <label htmlFor="name">Username: </label>

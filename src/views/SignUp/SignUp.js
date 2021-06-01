@@ -9,7 +9,7 @@ function SignUp() {
   const [user, setUser] = useState({email: "", name: "", password: ""});
   const [error, setError] = useState("");
 
-  const SignUp = details => {
+  const SignUp = details => { //signup function to set username in local storage
     setUser({
       email: details.email,
       name: details.name,
@@ -25,7 +25,7 @@ function SignUp() {
 
   let history = useHistory()
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = () => { //go to home page on successful submit
     window.location = '/';;
   }
 

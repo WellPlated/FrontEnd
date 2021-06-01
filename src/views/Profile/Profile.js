@@ -67,9 +67,9 @@ function Profile() {
   
   if (!("token" in localStorage)) // if user is not logged in
   { return <div className="not-logged-in">Not logged in! Please log in to view recipes.</div> }
-  else if (error != "") 
+  else if (error != "") //display other errors from the backend
   { return <div className="not-logged-in">{ error }</div> }
-  else if (Object.keys(myrecipes).length === 0) // if DOM renders before data is fetched
+  else if (Object.keys(myrecipes).length === 0) // if DOM renders before data is fetched or if user is not logged in
   { return <div className="not-logged-in">No recipes to display.</div> }
 
 

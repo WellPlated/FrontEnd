@@ -31,7 +31,7 @@ function Upload() {
 
   return (
     <div className="App">
-      { (!("token" in localStorage)) ? (  // if user is not logged in
+      { (!("token" in localStorage)) ? (  // if user is not logged in, display error message
         <div className="not-logged-in">Not logged in! Please log in to upload a recipe.</div>
       ) : (
         <div>
