@@ -37,7 +37,6 @@ export default function Home() {
           //Perform action based on error
         });
   }
-//need to change tags database to have same hash as recipes so i can grab tags accordingly
 
   const handleFilters = (filters) => {
     const newFilters = {...Filters};

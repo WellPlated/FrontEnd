@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from "prop-types";
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -19,8 +18,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Chip from "@material-ui/core/Chip"
 import axios from 'axios';
-//img
-import testImage from "../../img/shrimp-paella.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,13 +54,15 @@ export default function Recipe(props) {
   const [tags, setTags] = useState([]);
   const [liked, setLiked] = useState(false);
 
+
+  const image = require("../../img/" +
+    (props.cuisine === "Drinks/Bevs" ? "Drinks" : props.cuisine) +
+    ".jpg");
+
   useEffect(() => {
     retrieveTags(props.recipe_id);
   }, []); 
   // empty array acts as componentDidMount (runs once)
-
-  // console.log("RECIPE CARD")
-  // console.log(props.date)
 
   const deleteRecipe = (id, refresh) => {
     console.log("Will delete the recipe with this description: " + id);
@@ -83,7 +82,7 @@ export default function Recipe(props) {
   const likeRecipe = (id) => {
     console.log("Will like this recipe: " + id);
     axios
-      .post("http://127.0.0.1:5000/delete", {
+      .post("http://127.0.0.1:5000/like", {
         id: id,
       })
       .then((response) => {
@@ -140,7 +139,7 @@ export default function Recipe(props) {
         />
         <CardMedia
           className={classes.media}
-          // image={props.image}
+          image={image.default}
           title={props.description}
         />
         <CardContent>
@@ -160,8 +159,13 @@ export default function Recipe(props) {
             <ShareIcon />
           </IconButton>
           <div className={classes.tags}>
-            {tags.map( (tag) => (
-              <Chip className={classes.tag} variant="default" size="small" label={tag}/>
+            {tags.map((tag) => (
+              <Chip
+                className={classes.tag}
+                variant="default"
+                size="small"
+                label={tag}
+              />
             ))}
           </div>
         </CardActions>

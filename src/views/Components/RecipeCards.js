@@ -27,6 +27,7 @@ export default function RecipeCards(props) {
                   title={data.title}
                   recipe={data.recipe}
                   tags={data.tags}
+                  cuisine={data.cuisine}
                   user={data.user}
                   key={data.hash}
                   deletable={props.deletable}
