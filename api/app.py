@@ -100,7 +100,7 @@ def api_login():
 
 @app.route('/recipe', methods=["POST"])
 def get_recipe():
-    if requeest.method = 'POST':
+    if request.method == 'POST':
         data = request.json
         
         recipe = db.execute('SELECT * FROM recipes WHERE hash=:hashnum', hashnum=data["hashnum"])
