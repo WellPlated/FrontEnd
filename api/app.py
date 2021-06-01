@@ -79,8 +79,14 @@ def api_signup():
 
         # hash the password before storing it
         db.execute("INSERT INTO users(username,password,email) VALUES('"+str(data['username'])+"','"+str(generate_password_hash(str(data['password'])).decode('utf8'))+"','"+str(data['email'])+"')")
+
+        # login the user
+        auth_user = authenticate_user(data['username'], str(data['password']))
+        token = tokenize(auth_user) # generate token
+        if type(token) is bytes:
+            token=token[2:-1]
  
-        return { "status" : 200 }
+        return { "status" : 200, "token" : token }
 
 @app.route('/login', methods=['GET', 'POST'])
 def api_login():

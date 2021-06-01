@@ -23,6 +23,8 @@ function SignUpForm({ SignUp, error, onSubmit }) {
                 onSubmit()
                 SignUp(details)
                 // Automatically log in the user
+                localStorage.setItem("username", details.name);
+                localStorage.setItem("token", response["data"]["token"])
             }
             else if (response['data']['status'] === 403) {
                 error(response['data']['message'])
