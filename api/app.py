@@ -312,7 +312,6 @@ def recipe_getLikes():
                 # find_username = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])
                 recipe["user"] = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])[0]["username"]
                 del(recipe["user_id"])
-                del(recipe["id"])
                 final_return.append(recipe)
         print(final_return)
         return jsonify(final_return)
