@@ -55,9 +55,10 @@ export default function Recipe(props) {
   const [liked, setLiked] = useState(false);
 
 
-  const image = require("../../img/" +
-    (props.cuisine === "Drinks/Bevs" ? "Drinks" : props.cuisine) +
-    ".jpg");
+  // const image = require("../../img/" +
+  //   (props.cuisine === "Drinks/Bevs" ? "Drinks" : props.cuisine) +
+  //   ".jpg");
+  // console.log(props.cuisine);
 
   useEffect(() => {
     retrieveTags(props.recipe_id);
@@ -139,7 +140,7 @@ export default function Recipe(props) {
         />
         <CardMedia
           className={classes.media}
-          image={image.default}
+          // image={image.default}
           title={props.description}
         />
         <CardContent>
