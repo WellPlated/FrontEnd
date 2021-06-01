@@ -10,6 +10,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Fragment } from "react";
 import '../../css/Home.css';
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,16 +26,22 @@ const tags = [
   "Vegan",
   "Keto",
   "Paleo",
-  "Italian",
-  "Chinese",
-  "French",
-  "Mexican",
   "Nut-Free",
   "Dairy-Free",
   "Breakfast",
   "Lunch",
   "Dinner",
   "Drinks"
+];
+
+const cuisines = [
+  "Chinese", 
+  "Italian", 
+  "French", 
+  "Mexican",
+  "American",
+  "Drinks",
+  
 ];
 
 export default function FilterBoxes(props) {
@@ -57,7 +64,22 @@ export default function FilterBoxes(props) {
   return (
     <div className={classes.root}>
       <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">Filters</FormLabel>
+        <FormLabel component="legend">Cuisines</FormLabel>
+        {cuisines.map((value, index) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checked.indexOf(value) === -1 ? false : true}
+                onChange={() => handleToggle(value)}
+                name={value}
+              />
+            }
+            key={value}
+            label={value}
+          />
+        ))}
+        <Divider orientation="horizontal" variant="fullWidth"/>
+        <FormLabel component="legend">Restrictions</FormLabel>
         <FormGroup>
           {tags.map((value, index) => (
             <FormControlLabel
@@ -68,6 +90,7 @@ export default function FilterBoxes(props) {
                   name={value}
                 />
               }
+              key={value}
               label={value}
             />
           ))}

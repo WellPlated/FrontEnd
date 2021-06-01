@@ -79,8 +79,14 @@ def api_signup():
 
         # hash the password before storing it
         db.execute("INSERT INTO users(username,password,email) VALUES('"+str(data['username'])+"','"+str(generate_password_hash(str(data['password'])).decode('utf8'))+"','"+str(data['email'])+"')")
+
+        # login the user
+        auth_user = authenticate_user(data['username'], str(data['password']))
+        token = tokenize(auth_user) # generate token
+        if type(token) is bytes:
+            token=token[2:-1]
  
-        return { "status" : 200 }
+        return { "status" : 200, "token" : token }
 
 @app.route('/login', methods=['GET', 'POST'])
 def api_login():
@@ -98,6 +104,16 @@ def api_login():
 
 #[2:-1]
 
+@app.route('/recipe', methods=["POST"])
+def get_recipe():
+    if request.method == 'POST':
+        data = request.json
+        
+        recipe = db.execute('SELECT * FROM recipes WHERE hash=:hashnum', hashnum=data["hashnum"])
+
+        return {"status" : 200, "recipe" : recipe}
+
+
 @app.route('/recipes/user', methods=['POST'])
 def user_recipes():
     data=request.json
@@ -108,25 +124,27 @@ def user_recipes():
         token=data['token']
 
         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"]) # decode token to extract user metadata
+    except:
+        return {"status": 403, "message": "Session expired. Log in again!"}
 
+    try:
         response = {}
         response["status"] = 200
         response["recipes"] = db.execute("SELECT * FROM recipes WHERE user_id=:id", id=decoded['user_id'])
         print(response)
         
         return jsonify(response)
-    
     except:
-        return {"status": 403, "message": "no user logged in"}
+        return {"status": 403, "message": "Unable to get recipes"}
     
 @app.route('/upload', methods=['POST'])
-def api_upload():
+def api_upload(): # ENDPOINT to post a recipe
     if(request.method=='POST'):
         
         data = request.json
         token=data['user_id']
         try:
-            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"]) #decode user id from the token provided by the front end
             userID = decoded['user_id']
         except:
             return {"status": 403, "message": "Session expired. Please log in again."}
@@ -142,30 +160,32 @@ def api_upload():
         elif data['recipe'] == '':
             message = "No steps given. Try again"
 
-
+        #check if a recipe already exists
         check = db.execute("SELECT * from recipes WHERE user_id=:user_id and description=:descript and date=:date and title=:title", user_id=userID, descript=data['description'], date=data['date'], title= data['title'])
 
         if check != []:
             message = "Recipe already exists!"
 
-        if message != 'success':
+        if message != 'success': #if the message changed that means something went wrong and we return that
             print(message)
             return {"status": 403, "message" : message}
 
-        uniqueHash = randint(100000, 999999)
+        uniqueHash = randint(100000, 999999) #create a unique hash for the recipe
         hashCheck = db.execute("SELECT * from recipes where hash=:currHash", currHash=uniqueHash)
         while(hashCheck != []):
             uniqueHash = randint(100000, 999999)
             hashCheck = db.execute("SELECT * from recipes where hash=:currHash", currHash=uniqueHash)
 
         
+        #Post the recipe into the database
         db.execute("INSERT INTO recipes(user_id, title ,date, description, ingredients, recipe, cuisine, hash) \
             VALUES("+str(userID)+", '"+str(data['title'])+"','"+str(data['date'])+"','"+str(data['description'])+"','"+str(data['ingredients'])+"',\
                   '"+str(data['recipe'])+"', '"+str(data['cuisine'])+"', "+str(uniqueHash)+")")
         
-        
+        #get back the recipe id that we just put in
         recipeID = db.execute("SELECT id from recipes WHERE user_id=:user_id and description=:descript and date=:date and title=:title", user_id=userID, descript=data['description'], date=data['date'], title= data['title'])
        
+        #put tags in for the recipe
         for tag in data['tags']:
             db.execute("INSERT INTO tags(recipe_id,tag) VALUES("+str(recipeID[0]['id'])+","+"'"+str(tag)+"'"+")")
 
@@ -203,7 +223,6 @@ def api_getfilter():
                 # find_username = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])
                 recipe["user"] = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])[0]["username"]
                 del(recipe["user_id"])
-                del(recipe["id"])
                 # recipes.append({"status":200})
             return jsonify(recipes)
         for i in range(0,len(data['tags'])):
@@ -293,7 +312,6 @@ def recipe_getLikes():
                 # find_username = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])
                 recipe["user"] = db.execute("SELECT username FROM users WHERE id=:id", id=recipe["user_id"])[0]["username"]
                 del(recipe["user_id"])
-                del(recipe["id"])
                 final_return.append(recipe)
         print(final_return)
         return jsonify(final_return)

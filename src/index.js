@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Components
 import Home from './views/Home/Home.js';
 import Login from './views/Login/Login';
@@ -13,6 +13,7 @@ import SideNav from "./views/SideNav/SideNav";
 import Upload from "./views/Upload/Upload";
 import Display from "./views/Display/Display";
 import AboutUs from "./views/AboutUs/AboutUs";
+import Confirmation from "./views/Confirmation/Confirmation"
 
 var hist = createBrowserHistory();
 
@@ -27,6 +28,7 @@ ReactDOM.render(
         <Route path="/Upload" component={Upload} />
         <Route path="/Display/:hash" component={Display} />
         <Route path="/About" component={AboutUs} />
+        <Route path="/Confirmation" component={Confirmation} />
         {/*<Route path="/recipees/:index" component={recipeDisplay}/>*/}
         <Route path="/" component={Home} />
       </Switch>
