@@ -1,7 +1,5 @@
 import flask
 from flask import request, jsonify
-import sqlite3
-import hashlib
 from flask_cors import CORS
 from flask_bcrypt import generate_password_hash, check_password_hash
 from cs50 import SQL
@@ -51,7 +49,6 @@ def api_one_recipe():
     if request.method == 'GET':
         data = request.args
         recipe = db.execute("SELECT * FROM recipes WHERE hash=:hash", hash=data.get('hash'))
-        print("recipe: ", recipe)
         recipe[0]["user"] = db.execute("SELECT username FROM users WHERE id=:id", id=recipe[0]["user_id"])[0]["username"]
         del(recipe[0]["user_id"])
     return jsonify(recipe)
