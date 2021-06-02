@@ -314,18 +314,18 @@ def like_recipe():
         db.execute("INSERT INTO liked(user_id, post_id) VALUES(:user_id, :post_id)", user_id=user_id, post_id=recipe_id)
         return {'status' : 'success'}
 
-# @app.route('/unlike', methods=['POST']) 
-# def unlike_recipe():
-#     if request.method == 'POST':
-#         data = request.json
-#         recipe_id=data["recipe_id"]
-#         token=data["token"]
-#         # decode user id from the token provided by the front end
-#         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-#         user_id= decoded['user_id']
-#         print(data)
-#         db.execute("DELETE FROM liked WHERE recipe_id="+str(recipe_id)+" AND WHERE user_id="+str(user_id))
-#         return {'status' : 'success'}
+@app.route('/unlike', methods=['POST']) 
+def unlike_recipe():
+    if request.method == 'POST':
+        data = request.json
+        recipe_id=data["recipe_id"]
+        token=data["token"]
+        # decode user id from the token provided by the front end
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id= decoded['user_id']
+        print(data)
+        db.execute("DELETE FROM liked WHERE post_id="+str(recipe_id)+" AND user_id="+str(user_id))
+        return {'status' : 'success'}
 
 @app.route('/getLikes', methods=['POST']) 
 def recipe_getLikes():
