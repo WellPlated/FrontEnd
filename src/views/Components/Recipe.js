@@ -6,7 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
+import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -21,6 +21,7 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+
     maxWidth: 345,
   },
   media: {
@@ -53,11 +54,14 @@ export default function Recipe(props) {
   const classes = useStyles();
   const [tags, setTags] = useState([]);
   const [liked, setLiked] = useState(props.liked);
+  const [ID, setID] = useState(props.id);
   const [imageURL, setImageURL] = useState();
+  const rest = {...props};
 
   useEffect(() => {
     retrieveTags(props.recipe_id);
     setLiked(props.liked);
+    setID(props.id);
 
     if (!("token" in localStorage)) {
       // can't fetch recipes if a user is not logged in
@@ -67,7 +71,7 @@ export default function Recipe(props) {
     }
 
     getImage();
-  }, [props.liked]); 
+  }, [props.liked, props.id]); 
   // empty array acts as componentDidMount (runs once)
 
   const deleteRecipe = (id, refresh) => {
@@ -92,13 +96,16 @@ export default function Recipe(props) {
     }
     console.log("Will like this recipe: " + id);
     axios
-      .post("http://127.0.0.1:5000/like", {
-        id: id,
-        token: token
+      .post(("http://127.0.0.1:5000/" + (liked ? "unlike" : "like")), {
+        recipe_id : id,
+        token : token
       })
       .then((response) => {
-        setLiked(true);
-
+        if (response.data.status === "success") {
+          setLiked(!liked);
+        } else {
+          alert("Couldn't " + (liked ? "unlike" : "like") + " recipe");
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -175,13 +182,17 @@ export default function Recipe(props) {
           <IconButton
             color={liked ? "secondary" : "default"}
             aria-label="add to liked recipes"
-            onClick={() => likeRecipe(props.id, localStorage.getItem("token"))}
+            onClick={() => likeRecipe(ID, localStorage.getItem("token"))}
           >
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          <Button
+            size="small"
+            color="primary"
+            href={"/Display/$" + props.hash}
+          >
+            View Recipe
+          </Button>
           <div className={classes.tags}>
             {tags.map((tag) => (
               <Chip

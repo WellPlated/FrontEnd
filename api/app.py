@@ -181,7 +181,7 @@ def api_upload(): # ENDPOINT to post a recipe
 
         
         #Post the recipe into the database
-        db.execute("INSERT INTO recipes(user_id, title ,date, description, ingredients, recipe, cuisine, hash) \
+        db.execute("INSERT INTO recipes(user_id, title, date, description, ingredients, recipe, cuisine, hash) \
             VALUES("+str(userID)+", '"+str(data['title'])+"','"+str(data['date'])+"','"+str(data['description'])+"','"+str(data['ingredients'])+"',\
                   '"+str(data['recipe'])+"', '"+str(data['cuisine'])+"', "+str(uniqueHash)+")")
         
@@ -305,6 +305,7 @@ def tokenize(user_data: dict) -> str: # helper function to generate token
 def like_recipe():
     if request.method == 'POST':
         data = request.json
+        print("data: ", data)
         recipe_id=data["recipe_id"]
         token=data["token"]
         # decode user id from the token provided by the front end
@@ -318,6 +319,7 @@ def like_recipe():
 def unlike_recipe():
     if request.method == 'POST':
         data = request.json
+        print("data: ", data)
         recipe_id=data["recipe_id"]
         token=data["token"]
         # decode user id from the token provided by the front end
