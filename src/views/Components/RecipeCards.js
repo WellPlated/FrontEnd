@@ -9,21 +9,22 @@ import { Link } from 'react-router-dom';
 export default function RecipeCards(props) {
   return (
     <div className="recipes-container">
-        <Grid container>
+        <Grid container spacing={2}>
           {props.recipes.map((data) => {
             return (
-              <Grid item xs={12} md={6} lg={3} key={data.hash}>
-                <Link
+              <Grid item xs={12} md={6} lg={3} key={data.hash} >
+                {/* <Link
                   to={{
                     pathname: `/Display/${data.hash}`,
                     query: {
                       info: JSON.stringify(data),
                     },
                   }}
-                >
+                > */}
                   <Recipe
                     date={data.date}
                     id={data.id}
+                    recipe_id={data.id}
                     hash={data.hash}
                     description={data.description}
                     ingredient={data.ingredients}
@@ -35,7 +36,7 @@ export default function RecipeCards(props) {
                     deletable={props.deletable}
                     liked={props.liked.includes(data.id)}
                   />
-                </Link>
+                {/* </Link> */}
               </Grid>
             );
           })}

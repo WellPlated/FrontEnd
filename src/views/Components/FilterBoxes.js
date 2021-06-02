@@ -76,7 +76,7 @@ export default function FilterBoxes(props) {
             label={value}
           />
         ))}
-        <Divider orientation="horizontal" variant="fullWidth"/>
+        {/* <Divider orientation="horizontal" variant="fullWidth"/> */}
         <FormLabel component="legend">Restrictions</FormLabel>
         <FormGroup>
           {tags.map((value, index) => (

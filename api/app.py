@@ -301,7 +301,7 @@ def tokenize(user_data: dict) -> str: # helper function to generate token
             'user_id': user_data['id'],
             'email': user_data['email'],
             'password': user_data['password'],
-            'exp': datetime.utcnow() + timedelta(minutes=30)
+            'exp': datetime.utcnow() + timedelta(minutes=60)
         },
         SECRET_KEY,
         algorithm="HS256")
