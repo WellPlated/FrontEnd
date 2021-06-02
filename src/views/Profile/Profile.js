@@ -15,9 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 })); //Modify RecipeCard size for making display better
 
-function Profile() {
+export default function Profile(props) {
   const [error, setError] = useState("");
-  const [myrecipes, setMyRecipes] = useState({});
+  const [myrecipes, setMyRecipes] = useState([]);
+  const [liked, setLiked] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
   useEffect(async () => {
@@ -55,7 +56,22 @@ function Profile() {
     }
 
     getMyRecipes();
+    getLikes(localStorage.getItem("token"));
   }, []); // need useEffect so that data isn't fetched after each re-render
+
+    const getLikes = (token) => {
+      console.log("Checking liked recipes");
+      axios
+        .post("http://127.0.0.1:5000/getLikes", {
+          token: token,
+        })
+        .then((response) => {
+          setLiked(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
 
   console.log(myrecipes);
 
@@ -117,7 +133,6 @@ function Profile() {
                           deletable={true}
                         />
                       </Link>
-                      
                     </Grid>
                   ))
                 }
@@ -135,13 +150,28 @@ function Profile() {
               <div className="headerProfilePage">Liked Recipes</div>
               <Grid container direction="row" justify="center" spacing={1}>
                 <Grid item xs={5} md={3} className={classes.root}>
-                  <Recipe
-                    date={myrecipes[0]["date"]}
-                    title={myrecipes[0]["name"]}
-                    description={myrecipes[0]["description"]}
-                    id={myrecipes[0]["id"]}
-                    refresh={() => setRefresh(!refresh)}
-                  />
+                  {liked.map((recipe) => (
+                    <Grid item xs={5} md={3} className={classes.root}>
+                      <Link
+                        to={{
+                          pathname: `/Display/${recipe.hash}`,
+                          query: {
+                            info: JSON.stringify(recipe),
+                          },
+                        }}
+                      >
+                        <Recipe
+                          date={recipe.date}
+                          title={recipe.title}
+                          description={recipe.description}
+                          id={recipe.id}
+                          refresh={() => setRefresh(!refresh)}
+                          deletable={false}
+                          liked={true}
+                        />
+                      </Link>
+                    </Grid>
+                  ))}
                 </Grid>
               </Grid>
             </Grid>
@@ -151,5 +181,3 @@ function Profile() {
     </div>
   );
 }
-
-export default Profile;
