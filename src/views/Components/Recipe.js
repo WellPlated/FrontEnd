@@ -52,17 +52,22 @@ const useStyles = makeStyles((theme) => ({
 export default function Recipe(props) {
   const classes = useStyles();
   const [tags, setTags] = useState([]);
-  const [liked, setLiked] = useState(false);
-
-
-  // const image = require("../../img/" +
-  //   (props.cuisine === "Drinks/Bevs" ? "Drinks" : props.cuisine) +
-  //   ".jpg");
-  // console.log(props.cuisine);
+  const [liked, setLiked] = useState(props.liked);
+  const [imageURL, setImageURL] = useState();
 
   useEffect(() => {
     retrieveTags(props.recipe_id);
-  }, []); 
+    setLiked(props.liked);
+
+    if (!("token" in localStorage)) {
+      // can't fetch recipes if a user is not logged in
+      const user_token = null;
+    } else {
+      const user_token = localStorage.getItem("token");
+    }
+
+    getImage();
+  }, [props.liked]); 
   // empty array acts as componentDidMount (runs once)
 
   const deleteRecipe = (id, refresh) => {
@@ -80,14 +85,19 @@ export default function Recipe(props) {
     });
   }
 
-  const likeRecipe = (id) => {
+  const likeRecipe = (id, token) => {
+    if (token === null) {
+      alert("Please Log In or Sign Up to Like Recipes");
+      return;
+    }
     console.log("Will like this recipe: " + id);
     axios
       .post("http://127.0.0.1:5000/like", {
         id: id,
+        token: token
       })
       .then((response) => {
-        setLiked(!liked);
+        setLiked(true);
 
       })
       .catch(function (error) {
@@ -101,8 +111,8 @@ export default function Recipe(props) {
       .get("http://127.0.0.1:5000/recipes/gettags?recipe_id=" + recipe_id)
       .then((response) => {
         if (response["data"]["status"] === 200) {
-          console.log("tags: ");
-          console.log(response);
+          // console.log("tags: ");
+          // console.log(response);
           setTags(response.data.tags);
         } else if (response["data"]["status"] === 403) {
           alert("Failed to fetch tags data");
@@ -112,7 +122,20 @@ export default function Recipe(props) {
         console.log(error);
         //Perform action based on error
       });
-  }
+  };
+
+  const getImage = () => {
+    const food = encodeURIComponent(props.title);
+    axios
+      .get("http://127.0.0.1:5000/getImage?name=" + food)
+      .then((response) => {
+        setImageURL(response.data.url);
+        console.log("image url:" + imageURL);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -140,7 +163,7 @@ export default function Recipe(props) {
         />
         <CardMedia
           className={classes.media}
-          // image={image.default}
+          image={imageURL}
           title={props.description}
         />
         <CardContent>
@@ -152,7 +175,7 @@ export default function Recipe(props) {
           <IconButton
             color={liked ? "secondary" : "default"}
             aria-label="add to liked recipes"
-            onClick={() => likeRecipe(props.id)}
+            onClick={() => likeRecipe(props.id, localStorage.getItem("token"))}
           >
             <FavoriteIcon />
           </IconButton>

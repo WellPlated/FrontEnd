@@ -4,12 +4,12 @@ import '../../css/Home.css';
 // @material-ui components
 import Grid from "@material-ui/core/Grid";
 // Components
-import SideNav from "../SideNav/SideNav.js";
 import RecipeCards from "../Components/RecipeCards.js";
 import FilterBoxes from "../Components/FilterBoxes.js";
 
 export default function Home() {
   const [Recipes, setRecipes] = useState([]);
+  const [Liked, setLiked] = useState([]);
   const [SearchTerms, setSearchTerms] = useState("");
   const [PostSize, setPostSize] = useState();
 
@@ -17,6 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     getRecipes();
+    retrieveLikes(localStorage.getItem("token"));
   }, []);
 
   const getRecipes = (variables) => {
@@ -49,6 +50,21 @@ export default function Home() {
     setFilters(newFilters);
   }
 
+  const retrieveLikes = (token) => {
+    console.log("Checking liked recipes");
+    axios
+      .post("http://127.0.0.1:5000/getLikes", {
+        token: token,
+      })
+      .then((response) => {
+        let temp = response.data.map(recipe => recipe.id);
+        setLiked(temp);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="Home">
       <header className="Home-header">
@@ -65,7 +81,7 @@ export default function Home() {
                 <div style={{ display: 'flex', height: '300px', justifyContent: 'center', alignItems: 'center' }}>
                     <h2>No posts yet...</h2>
                 </div> :
-                <RecipeCards recipes={Recipes} deletable={false} />
+                <RecipeCards recipes={Recipes} deletable={false} liked={Liked}/>
               }
             </Grid>
           </Grid>

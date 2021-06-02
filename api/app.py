@@ -8,6 +8,8 @@ from cs50 import SQL
 import jwt
 from datetime import datetime, timedelta
 from random import randint
+import urllib.parse
+import urllib.request
 
 SECRET_KEY="8947357943789907843098489284HFVH94-7FG-GVVG-"
 app = flask.Flask(__name__)
@@ -100,9 +102,8 @@ def api_login():
                 token=token[2:-1]
             return {"status": 200, "access_token": str(token), "token_type": "bearer"}
       else:
+          print("auth:",auth_user)
           return {"status": 403, "message": "Wrong credentials!"}
-
-#[2:-1]
 
 @app.route('/recipe', methods=["POST"])
 def get_recipe():
@@ -213,6 +214,19 @@ def api_gettags():
       return_dict={"status":200,"tags":tags}
       return jsonify(return_dict)
 
+@app.route('/getImage', methods=['GET'])
+def get_image():
+    if request.method == 'GET':
+        data = request.args
+        link = "https://api.unsplash.com/search/photos?query="+urllib.parse.quote_plus(
+            str(data.get("name")))+"&client_id=1pjEpq5A_i7jTAWtXARj4YAehVrEu_VDFAnsOu0PRTs"
+        print("link: ", link)
+        f = urllib.request.urlopen(link)
+        myfile = f.read()
+        a = str(myfile).split('"raw":')
+        b = a[1].split(",")
+        return jsonify({ "url": b[0][1:-1]})
+
 @app.route('/recipes/filter', methods=['POST'])
 def api_getfilter():
     if request.method == 'POST':
@@ -228,7 +242,7 @@ def api_getfilter():
                 # recipes.append({"status":200})
             return jsonify(recipes)
         for i in range(0,len(data['tags'])):
-            temp=db.execute("SELECT recipe_id FROM tags WHERE tag='"+str(data['tags'][i]).lower()+"'")
+            temp=db.execute("SELECT recipe_id FROM tags WHERE lower(tag)='"+str(data['tags'][i]).lower()+"'")
             for j in temp:
                 if(j['recipe_id'] not in tempArray):
                     tempArray.append(j['recipe_id'])
@@ -292,16 +306,34 @@ def like_recipe():
     if request.method == 'POST':
         data = request.json
         recipe_id=data["recipe_id"]
-        user_id=data["user_id"]
+        token=data["token"]
+        # decode user id from the token provided by the front end
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id= decoded['user_id']
         print(data)
         db.execute("INSERT INTO liked(user_id, post_id) VALUES(:user_id, :post_id)", user_id=user_id, post_id=recipe_id)
         return {'status' : 'success'}
+
+# @app.route('/unlike', methods=['POST']) 
+# def unlike_recipe():
+#     if request.method == 'POST':
+#         data = request.json
+#         recipe_id=data["recipe_id"]
+#         token=data["token"]
+#         # decode user id from the token provided by the front end
+#         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+#         user_id= decoded['user_id']
+#         print(data)
+#         db.execute("DELETE FROM liked WHERE recipe_id="+str(recipe_id)+" AND WHERE user_id="+str(user_id))
+#         return {'status' : 'success'}
 
 @app.route('/getLikes', methods=['POST']) 
 def recipe_getLikes():
     if request.method == 'POST':
         data = request.json
-        user_id=data["user_id"]
+        token=data["token"]
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id= decoded['user_id']
         print(data)
         tempData = db.execute("SELECT post_id FROM liked WHERE user_id="+str(user_id))
         recipes_ids=[]
@@ -321,13 +353,13 @@ def recipe_getLikes():
 def authenticate_user(username: str, password: str) -> dict: # helper function to check user's credentials
     existing_user = db.execute("SELECT * FROM users WHERE username="+"'"+username+"'")
     print(existing_user)
-    try:
-        if existing_user and check_password_hash(existing_user[0]['password'],
+    # try:
+    if existing_user and check_password_hash(existing_user[0]['password'],
                                                 password):
-            return user_helper(existing_user)
-        else:
-            return None
-    except:
+        return user_helper(existing_user)
+    else:
         return None
+    # except:
+        # return None
 
 app.run()
