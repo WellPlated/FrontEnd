@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 export default function Display(props) {
-
+  const hash = (window.location.pathname).slice(-6);
   const [Comments, setComments] = useState([]);
   const [Confirmation, setConfirmation] = useState("");
 
@@ -18,7 +18,7 @@ export default function Display(props) {
     // fetch comments
     async function getComments() {
       axios.post('http://127.0.0.1:5000/getcomments', { 
-        hashnum : info["hash"],
+        hashnum : hash,
       })
       .then(function(response) {
         console.log(response);
@@ -47,7 +47,7 @@ export default function Display(props) {
       e.preventDefault();
       axios.post('http://127.0.0.1:5000/comment', {
             comment : comment.current.value,
-            hashnum : info["hash"],
+            hashnum : hash,
         })
             .then(function(response){
                 console.log(response);
@@ -61,25 +61,21 @@ export default function Display(props) {
   
   //Accessing through direct url, e.g. shared links (no query passed, have to use local storage from Home.js)
   if (!props.location.hasOwnProperty('query')){
-    const recipes = JSON.parse(localStorage.getItem("recipes"));
-    if (recipes) {
-      recipes.forEach(element => {
-        if (element.hash === parseInt(props.match.params.hash)){
-          info = element;
-          return;
-        }
-      });
-    }
-  }
+    /*
+    * If we don't use the Home page link, fetch it from the database
+    * set info = to the api call
+    */
+    
+  } 
 
   //Accessing through Kitchen Cache/My Profile (query passed)
   else{
     info = JSON.parse(props.location.query.info)
   }
 
-  //In case, recipe not found
+  //In case, recipe not found (bad hash, recipe doesn't exist)
   if (info === undefined){
-    return null;
+    return <div className="display-header">No such recipe found!</div>;
   }
    
     let cuisine = info.cuisine;
