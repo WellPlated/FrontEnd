@@ -6,6 +6,7 @@ import Recipe from "../Components/Recipe";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 const name = localStorage.getItem("username"); //Filler for now
 const useStyles = makeStyles((theme) => ({
@@ -99,14 +100,24 @@ function Profile() {
                   // map each recipe to a recipe card
                   myrecipes.map((recipe) => (
                     <Grid item xs={5} md={3} className={classes.root}>
-                      <Recipe
-                        date={recipe.date}
-                        title={recipe.title}
-                        description={recipe.description}
-                        id={recipe.id}
-                        refresh={() => setRefresh(!refresh)}
-                        deletable={true}
-                      />
+                      <Link
+                        to={{
+                          pathname: `/Display/${recipe.hash}`,
+                          query: {
+                            info: JSON.stringify(recipe),
+                          },
+                        }}
+                      >
+                        <Recipe
+                          date={recipe.date}
+                          title={recipe.title}
+                          description={recipe.description}
+                          id={recipe.id}
+                          refresh={() => setRefresh(!refresh)}
+                          deletable={true}
+                        />
+                      </Link>
+                      
                     </Grid>
                   ))
                 }

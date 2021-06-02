@@ -20,8 +20,8 @@ export default function RecipeCards(props) {
                       info: JSON.stringify(data),
                     },
                   }}
-                ></Link>
-                <Recipe
+                >
+                  <Recipe
                   date={data.date}
                   recipe_id={data.id}
                   description={data.description}
@@ -34,6 +34,8 @@ export default function RecipeCards(props) {
                   deletable={props.deletable}
                   liked={props.liked.includes(data.id)}
                 />
+                </Link>
+                
               </Grid>
             );
           })}

@@ -52,6 +52,7 @@ export default function Display(props) {
             .then(function(response){
                 console.log(response);
                 setConfirmation("Added comment!");
+                setComments([...Comments, comment.current.value] )
         })
         .catch(function(error){
             console.log(error);
