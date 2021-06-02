@@ -27,7 +27,6 @@ export default function Home() {
                 setRecipes(response.data);
                 if (response['data']['status'] === 200) {
                   setRecipes(response.data);
-                  localStorage.setItem("recipes", JSON.stringify(response.data))
                 }
                 else if (response['data']['status'] === 403) {
                   alert("Failed to fetch recipe datas");

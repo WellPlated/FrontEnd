@@ -12,9 +12,11 @@ export default function Display(props) {
   const hash = (window.location.pathname).slice(-6);
   const [Comments, setComments] = useState([]);
   const [Confirmation, setConfirmation] = useState("");
+  //If query exists, we can use that info, otherwise leave it for the getter function
+  const [Recipe, setRecipe] = useState(props.location.query ? JSON.parse(props.location.query.info) : undefined);
+
 
   useEffect (async () => {
-    
     // fetch comments
     async function getComments() {
       axios.post('http://127.0.0.1:5000/getcomments', { 
@@ -32,14 +34,29 @@ export default function Display(props) {
       });
     }
 
-    if (info) {
+    //Fetch recipe from database
+    //Used to allow shareable links
+    function getRecipe() {
+      axios.get('http://127.0.0.1:5000/recipes/fetch_recipe?hash='+ hash)
+      .then((response) => {
+       setRecipe(response['data'][0]);
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+    }
+
+    //Retrieve recipe from database if query is non-existent
+    if (!Recipe){
+      getRecipe();
+    }
+
+    if (Recipe) {
       getComments();
     }
 
   }, []);
 
-
-  let info = undefined;
   const comment = React.useRef(null);
      //submit comment to database
     const handleSubmit = e => {
@@ -59,30 +76,16 @@ export default function Display(props) {
         });
     }
   
-  //Accessing through direct url, e.g. shared links (no query passed, have to use local storage from Home.js)
-  if (!props.location.hasOwnProperty('query')){
-    /*
-    * If we don't use the Home page link, fetch it from the database
-    * set info = to the api call
-    */
-    
-  } 
-
-  //Accessing through Kitchen Cache/My Profile (query passed)
-  else{
-    info = JSON.parse(props.location.query.info)
-  }
-
-  //In case, recipe not found (bad hash, recipe doesn't exist)
-  if (info === undefined){
-    return <div className="display-header">No such recipe found!</div>;
-  }
+//In case, recipe not found (bad hash, recipe doesn't exist)
+if (Recipe === undefined){
+  return <div className="display-header">No such recipe found!</div>;
+}
    
-    let cuisine = info.cuisine;
+    let cuisine = Recipe.cuisine;
     console.log("cuisine" + cuisine);
-    if (info.cuisine === "Drinks/Bevs"){
+    if (Recipe.cuisine === "Drinks/Bevs"){
       cuisine = "Drinks";
-    }else if(info.cuisine === ""){
+    }else if(Recipe.cuisine === ""){
       cuisine = "American";
     }
     const image = require('../../img/' + cuisine + '.jpg');
@@ -92,10 +95,9 @@ export default function Display(props) {
         <header className="display-header">
           
             <div className="recipeHeader">
-              <h2>~{info.title}~</h2>
+              <h2>~{Recipe.title}~</h2>
             </div>
               
-           
         </header>
       
         <header className="display-content-background">
@@ -107,26 +109,27 @@ export default function Display(props) {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Grid container direction="column" justify="space-between" spacing={5}>
+                      {/* Displays all the information about the recipe */}
                         <Grid item xs={9}>
-                            <div className="recipeInfo"><b>Chef: </b> {info.user}</div>
+                            <div className="recipeInfo"><b>Chef: </b> {Recipe.user}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div className="recipeInfo"><b>Date Uploaded: </b> {info.date}</div>
+                            <div className="recipeInfo"><b>Date Uploaded: </b> {Recipe.date}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div className="recipeInfo"><b>Cuisine: </b> {info.cuisine}</div>
+                            <div className="recipeInfo"><b>Cuisine: </b> {Recipe.cuisine}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div className="recipeInfo"><b>Description:</b> {info.description}</div>
+                            <div className="recipeInfo"><b>Description:</b> {Recipe.description}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div className="recipeInfo"><b>Ingredients:</b> {info.ingredients}</div>
+                            <div className="recipeInfo"><b>Ingredients:</b> {Recipe.ingredients}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div className="recipeInfo"><b>Recipe:</b> {info.recipe}</div>
+                            <div className="recipeInfo"><b>Recipe:</b> {Recipe.recipe}</div>
                         </Grid>
                         <Grid item xs={9}>
-                            <div className="recipeInfo"><b>Tags:</b> {info.tags}</div>
+                            <div className="recipeInfo"><b>Tags:</b> {Recipe.tags}</div>
                         </Grid>
                     </Grid>
                 </Grid>
