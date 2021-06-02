@@ -37,7 +37,7 @@ export default function Display(props) {
       axios.get('http://127.0.0.1:5000/recipes/fetch_recipe?hash='+ hash)
       .then((response) => {
         console.log(response);
-       setRecipe(response['data'][0]);
+        setRecipe(response['data'][0]);
       })
       .catch(function(error){
         console.log(error);
