@@ -29,15 +29,22 @@ const tags = [
   "Breakfast",
   "Lunch",
   "Dinner",
+  "Low-Calorie",
+  "High-Protein",
   "Drinks"
 ];
 
 const cuisines = [
+  "American",
+  "Italian",
+  "Thai",
   "Chinese", 
-  "Italian", 
-  "French", 
+  "Vietnamese",
+  "Indian",
   "Mexican",
-  "American"
+  "French",
+  "Greek",
+  "Japanese"
 ];
 
 export default function FilterBoxes(props) {
