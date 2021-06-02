@@ -5,9 +5,6 @@ import '../../css/Display.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
-
-
 export default function Display(props) {
   const hash = (window.location.pathname).slice(-6);
   const [Comments, setComments] = useState([]);
@@ -39,6 +36,7 @@ export default function Display(props) {
     function getRecipe() {
       axios.get('http://127.0.0.1:5000/recipes/fetch_recipe?hash='+ hash)
       .then((response) => {
+        console.log(response);
        setRecipe(response['data'][0]);
       })
       .catch(function(error){
@@ -57,6 +55,7 @@ export default function Display(props) {
 
   }, []);
 
+  console.log(Recipe);
   const comment = React.useRef(null);
      //submit comment to database
     const handleSubmit = e => {

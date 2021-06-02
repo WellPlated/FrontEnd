@@ -13,14 +13,14 @@ export default function RecipeCards(props) {
           {props.recipes.map((data) => {
             return (
               <Grid item xs={12} md={6} lg={3} key={data.hash}>
-                {/* <Link
+                <Link
                   to={{
                     pathname: `/Display/${data.hash}`,
                     query: {
                       info: JSON.stringify(data),
                     },
                   }}
-                > */}
+                >
                   <Recipe
                     date={data.date}
                     id={data.id}
@@ -35,7 +35,7 @@ export default function RecipeCards(props) {
                     deletable={props.deletable}
                     liked={props.liked.includes(data.id)}
                   />
-                {/* </Link> */}
+                </Link>
               </Grid>
             );
           })}
