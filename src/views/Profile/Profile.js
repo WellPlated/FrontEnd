@@ -128,6 +128,8 @@ export default function Profile(props) {
                           id={recipe.id}
                           recipe_id={recipe.id}
                           refresh={() => setRefresh(!refresh)}
+                          user={recipe.user}
+                          tags={recipe.tags}
                           deletable={true}
                         />
                       {/* </Link> */}
@@ -158,6 +160,8 @@ export default function Profile(props) {
                           description={recipe.description}
                           id={recipe.id}
                           refresh={() => setRefresh(!refresh)}
+                          user={recipe.user}
+                          tags={recipe.tags}
                           deletable={false}
                           liked={true}
                         />
