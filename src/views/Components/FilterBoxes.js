@@ -37,9 +37,7 @@ const cuisines = [
   "Italian", 
   "French", 
   "Mexican",
-  "American",
-  "Drinks",
-  
+  "American"
 ];
 
 export default function FilterBoxes(props) {
