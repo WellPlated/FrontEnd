@@ -13,7 +13,7 @@ function LoginForm({ Login, error, onSubmit }) {
             username : details.name,
             password : details.password
         })
-            .then(function(response){
+            .then(function(response) {
                 console.log(response);
                 if (response['data']['status'] === 200) {
                     Login(details);
@@ -31,6 +31,7 @@ function LoginForm({ Login, error, onSubmit }) {
     }
 
     return ( //set up entries for form, set details on change
+
         <form onSubmit={submitHandler}> 
             <div className="form-inner"> 
                 <h2>Welcome!</h2>
@@ -49,6 +50,7 @@ function LoginForm({ Login, error, onSubmit }) {
                 <a href="/SignUp">Sign Up</a>
             </div>
         </form>
+        
     )
 }
 

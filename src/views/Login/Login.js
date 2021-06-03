@@ -27,13 +27,12 @@ function Login() {
     setError(message);
   }
 
-  let history = useHistory()
-
   const handleOnSubmit = () => { //change to profile page on success
     window.location = '/Profile';
   }
 
   return (
+
     <div className="App">
       { ("username" in localStorage) ? ( //display welcome message if user is logged in
         <div className="welcome">
@@ -47,6 +46,7 @@ function Login() {
       </div>
       )}
     </div>
+
   );
 }
 

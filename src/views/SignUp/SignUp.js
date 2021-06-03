@@ -11,10 +11,10 @@ function SignUp() {
 
   const SignUp = details => { //signup function to set username in local storage
     setUser({
-      email: details.email,
-      name: details.name,
-      password: details.password
-  });
+        email: details.email,
+        name: details.name,
+        password: details.password
+    });
     console.log(user);
     localStorage.setItem("username", details.name);
   }
@@ -22,9 +22,7 @@ function SignUp() {
   const Error = message => {
     setError(message);
   }
-
-  let history = useHistory()
-
+  
   const handleOnSubmit = () => { //go to home page on successful submit
     window.location = '/';;
   }

@@ -107,32 +107,23 @@ export default function Profile(props) {
           <Grid container direction="row" spacing={1}>
             <Grid item xs={5}>
               <div className="headerProfilePage">My Recipes</div>
-              <Grid container direction="row" justify="center" spacing={1}>
+              <Grid container direction="row" justify="center" spacing={2}>
                 {
                   // map each recipe to a recipe card
                   myrecipes.map((recipe) => (
-                    <Grid item xs={5} md={3} className={classes.root}>
-                      {/* <Link
-                        to={{
-                          pathname: `/Display/${recipe.hash}`,
-                          query: {
-                            info: JSON.stringify(recipe),
-                          },
-                        }}
-                      > */}
-                        <Recipe
-                          date={recipe.date}
-                          title={recipe.title}
-                          hash={recipe.hash}
-                          description={recipe.description}
-                          id={recipe.id}
-                          recipe_id={recipe.id}
-                          refresh={() => setRefresh(!refresh)}
-                          user={recipe.user}
-                          tags={recipe.tags}
-                          deletable={true}
-                        />
-                      {/* </Link> */}
+                    <Grid item xs={12} md={6} lg={3} className={classes.root}>
+                      <Recipe
+                        date={recipe.date}
+                        title={recipe.title}
+                        hash={recipe.hash}
+                        description={recipe.description}
+                        id={recipe.id}
+                        recipe_id={recipe.id}
+                        refresh={() => setRefresh(!refresh)}
+                        user={recipe.user}
+                        tags={recipe.tags}
+                        deletable={true}
+                      />
                     </Grid>
                   ))
                 }
@@ -149,26 +140,23 @@ export default function Profile(props) {
             <Grid item xs={5}>
               <div className="headerProfilePage">Liked Recipes</div>
               <Grid container direction="row" justify="center" spacing={2}>
-                
-                  {liked.map((recipe) => (
-                    <Grid item xs={5} md={3} className={classes.root}>
-                      
-                        <Recipe
-                          date={recipe.date}
-                          title={recipe.title}
-                          hash={recipe.hash}
-                          description={recipe.description}
-                          id={recipe.id}
-                          refresh={() => setRefresh(!refresh)}
-                          user={recipe.user}
-                          tags={recipe.tags}
-                          deletable={false}
-                          liked={true}
-                        />
-                      
-                    </Grid>
-                  ))}
-                
+                {liked.map((recipe) => (
+                  <Grid item xs={12} md={6} lg={3} className={classes.root}>
+                    <Recipe
+                      date={recipe.date}
+                      title={recipe.title}
+                      hash={recipe.hash}
+                      description={recipe.description}
+                      id={recipe.id}
+                      recipe_id={recipe.id}
+                      refresh={() => setRefresh(!refresh)}
+                      user={recipe.user}
+                      tags={recipe.tags}
+                      deletable={false}
+                      liked={true}
+                    />
+                  </Grid>
+                ))}
               </Grid>
             </Grid>
           </Grid>
