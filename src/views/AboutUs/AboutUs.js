@@ -5,6 +5,7 @@ import "../../css/About.css";
 export default function AboutUs (){
     
     return (
+      
       <div className="AboutUsPage">
         <div >
           <div className="aboutHeader">
@@ -36,5 +37,6 @@ export default function AboutUs (){
 
         </div>
       </div>
+      
     );
   }

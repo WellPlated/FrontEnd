@@ -171,13 +171,13 @@ export default function Display(props) {
               ></textarea>
             </Grid>
             <Grid item xs={9}>
-              <button
+              <a
                 onClick={handleSubmit}
                 type="submit"
                 className="submit-comment-button"
               >
                 Post!
-              </button>
+              </a>
               <div>
                 {Confirmation /* confirms that comment was submitted */}
               </div>

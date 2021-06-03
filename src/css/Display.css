@@ -59,7 +59,8 @@
   color:whitesmoke;
   font-size: 25px;
   border: white;
-  border-width: 50px;
+  border-width: 20px;
+
 }
 
 .display-content{
@@ -78,6 +79,32 @@
   justify-content: center;
 }
 .image{
-  width:550px;
-  height:550px;
+  max-width: 550px;
+  max-height: 550px;
+  width: auto;
+  height: auto;
+ 
+}
+
+ul {
+  list-style: none;
+  font-size: 22px;
+}
+ul li::before {
+  content: "";
+  background-image: url(https://static.thenounproject.com/png/638755-200.png);
+  background-size: contain;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  top: 0.1rem;
+  margin-right: 0.2rem;
+}
+
+ul li {
+  border: 3px solid rgb(253, 149, 149);
+  margin-top: 2px;
+  background-color:white;
+  color: #bc5a45
 }
