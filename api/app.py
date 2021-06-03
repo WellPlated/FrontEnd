@@ -266,6 +266,7 @@ def delete_recipe():
         recipe_id = data['id']
 
         db.execute("DELETE FROM recipes WHERE id=" + str(recipe_id)) # delete the post
+        db.execute("DELETE FROM tags WHERE recipe_id=" + str(recipe_id)) # delete the tags
         return {'status' : 'test'}
 
 @app.route('/comment', methods=['POST'])
