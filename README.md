@@ -17,6 +17,10 @@ These are the steps to start up the project:
 
 Once you have our project open, you can explore our different pages and upload recipes of your own!
 
+![image](https://user-images.githubusercontent.com/75349834/120712382-659df300-c475-11eb-9ba5-6d713641f477.png)
+(Our Home Page)
+
+
 The Team:
 Kratik Agrawal
 Tanaya Nawathe
