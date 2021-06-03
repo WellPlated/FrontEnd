@@ -19,6 +19,8 @@
 .sidenav a{
   padding-top: 15px;
   padding-bottom: 15px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .header {

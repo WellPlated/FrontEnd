@@ -107,7 +107,7 @@ function UploadForm({ Upload, error, onSubmit }) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="tags">Select All Tags that Apply: </label>
-                    <select multiple={true} name="tags" id="tags" 
+                    <select multiple={true} name="tags" id="tags" className="tagsBox"
                     onChange={handleChange} value={details.tags}>
                         <option value="American">American</option>
                         <option value="Italian">Italian</option>
