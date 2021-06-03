@@ -21,24 +21,27 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-
     maxWidth: 345,
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   avatar: {
     backgroundColor: red[500],
   },
   tags: {
+    display: "flex",
     overflow: "auto",
     flexWrap: "nowrap",
     width: "55%",
     height: "30px",
+    "&::-webkit-scrollbar": {
+      display: "none"
+    }
   },
   tag: {
-    margin: theme.spacing(0.5)
+    margin: theme.spacing(0.5),
   },
 }));
 
