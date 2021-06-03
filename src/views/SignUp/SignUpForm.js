@@ -37,6 +37,7 @@ function SignUpForm({ SignUp, error, onSubmit }) {
     }
 
     return ( //set up sign up form entries, set details on change
+
         <form onSubmit={submitHandler}>
             <div className="form-inner">
                 <h2>Enter information</h2>
@@ -58,6 +59,7 @@ function SignUpForm({ SignUp, error, onSubmit }) {
                 <input type="submit" value="SIGN UP" />
             </div>
         </form>
+    
     )
 }
 
