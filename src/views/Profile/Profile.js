@@ -107,11 +107,11 @@ export default function Profile(props) {
           <Grid container direction="row" spacing={1}>
             <Grid item xs={5}>
               <div className="headerProfilePage">My Recipes</div>
-              <Grid container direction="row" justify="center" spacing={1}>
+              <Grid container direction="row" justify="center" spacing={2}>
                 {
                   // map each recipe to a recipe card
                   myrecipes.map((recipe) => (
-                    <Grid item xs={5} md={3} className={classes.root}>
+                    <Grid item xs={12} md={6} lg={3} className={classes.root}>
                       <Recipe
                         date={recipe.date}
                         title={recipe.title}
@@ -124,7 +124,6 @@ export default function Profile(props) {
                         tags={recipe.tags}
                         deletable={true}
                       />
-                      {/* </Link> */}
                     </Grid>
                   ))
                 }
@@ -142,7 +141,7 @@ export default function Profile(props) {
               <div className="headerProfilePage">Liked Recipes</div>
               <Grid container direction="row" justify="center" spacing={2}>
                 {liked.map((recipe) => (
-                  <Grid item xs={5} md={3} className={classes.root}>
+                  <Grid item xs={12} md={6} lg={3} className={classes.root}>
                     <Recipe
                       date={recipe.date}
                       title={recipe.title}

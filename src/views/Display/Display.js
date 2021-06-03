@@ -28,6 +28,24 @@ export default function Display(props) {
       });
   };
 
+  const getTags = (id) => {
+    const identifier = encodeURIComponent(id);
+    axios
+      .get("http://127.0.0.1:5000/recipes/gettags?recipe_id=" + identifier)
+      .then((response) => {
+        if (response["data"]["status"] === 200) {
+          // console.log("tags: ");
+          setRecipeTags(response.data.tags);
+        } else if (response["data"]["status"] === 403) {
+          alert("Failed to fetch tags data");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        //Perform action based on error
+      });
+  }
+
   useEffect(async () => {
     // fetch comments
     async function getComments() {
@@ -64,8 +82,12 @@ export default function Display(props) {
       });
   }
 
-    //Fetch recipe from database
-    //Used to allow shareable links
+    /*
+    * Fetch recipe from database
+    * Used to allow shareable links
+    * Fetch recipe image
+    * Fetch recipe tags
+    */
     function getRecipe() {
       axios
         .get("http://127.0.0.1:5000/recipes/fetch_recipe?hash=" + hash)
@@ -90,7 +112,6 @@ export default function Display(props) {
     }
   }, []);
 
-  console.log(Recipe);
   const comment = React.useRef(null);
   let tags = [];
 
@@ -104,6 +125,7 @@ export default function Display(props) {
     }
   }
 
+  console.log(tags);
   //submit comment to database
   const handleSubmit = (e) => {
     console.log("Comment added: " + comment.current.value);
@@ -127,7 +149,7 @@ export default function Display(props) {
   if (Recipe === undefined) {
     return <div className="display-header">No such recipe found!</div>;
   }
-
+  console.log(RecipeTags)
   return (
     <div className="display-main">
       <header className="display-header">
