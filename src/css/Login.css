@@ -34,7 +34,7 @@ form:after {
   right: -8px;
   bottom: -8px;
   z-index: 1;
-  background-image: linear-gradient(to bottom right, #fadd6a, #ff526f);
+  background-image: linear-gradient(to bottom right, #f8cc6d, #ff526f);
 }
 
 
@@ -69,7 +69,7 @@ form .form-inner .form-group {
 }
 
 .form-inner .form-group:focus-within label {
-  color: #FE4880;
+  color: #d84475;
 }
 
 form .form-inner .form-group input {
@@ -89,7 +89,7 @@ form .form-inner input[type="submit"] {
   display: inline-block;
   padding: 10px 15px;
   border-radius: 8px;
-  background-image: linear-gradient(to right, #FFCE00 50%, #FFCE00 50%, #FE4880);
+  background-image: linear-gradient(to right, #ffd767 50%, #FFCE00 50%, #FE4880);
   background-size: 200%;
   background-position: 0%;
   transition: 0.4s;
@@ -136,7 +136,7 @@ a {
 }
 
 a:hover {
-  background-image: linear-gradient(to right, #f7a36b 25%, #f58856 50%, #FE4880);
+  background-image: linear-gradient(to right, #fac564 25%, #f38db8 50%, #FE4880);
 } 
 
 a:active {
