@@ -22,12 +22,12 @@ Once you have our project open, you can explore our different pages and upload r
 
 
 The Team:
-Kratik Agrawal,
-Tanaya Nawathe,
-Medha Kini,
-Shounak Kuiry,
-Abhigya Sodani,
+Kratik Agrawal
+Tanaya Nawathe
+Medha Kini
+Shounak Kuiry
+Abhigya Sodani
 Michael Simon
 
-![image](https://user-images.githubusercontent.com/75349834/120722268-570b0800-c484-11eb-93a3-0d3b2264b740.png)
+![group](https://user-images.githubusercontent.com/75349834/120722645-efa18800-c484-11eb-9a25-eb3dbb2adeec.jpg)
 (Our Team)
