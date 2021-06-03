@@ -14,7 +14,7 @@ export default function Display(props) {
   const [Recipe, setRecipe] = useState(
     props.location.query ? JSON.parse(props.location.query.info) : undefined
   );
-
+  const [RecipeTags, setRecipeTags] = useState([]);
   const getImage = (name) => {
     const food = encodeURIComponent(name);
     axios
@@ -46,6 +46,23 @@ export default function Display(props) {
           console.log(error);
         });
     }
+    const getTags = (id) => {
+    const identifier = encodeURIComponent(id);
+    axios
+      .get("http://127.0.0.1:5000/recipes/gettags?recipe_id=" + identifier)
+      .then((response) => {
+        if (response["data"]["status"] === 200) {
+          // console.log("tags: ");
+          setRecipeTags(response.data.tags);
+        } else if (response["data"]["status"] === 403) {
+          alert("Failed to fetch tags data");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        //Perform action based on error
+      });
+  }
 
     //Fetch recipe from database
     //Used to allow shareable links
@@ -56,6 +73,7 @@ export default function Display(props) {
           console.log(response);
           setRecipe(response["data"][0]);
           getImage(response["data"][0].title);
+          getTags(response["data"][0].id);
         })
         .catch(function (error) {
           console.log(error);
@@ -74,6 +92,18 @@ export default function Display(props) {
 
   console.log(Recipe);
   const comment = React.useRef(null);
+  let tags = [];
+
+  //Capitalize and separate tags with commas
+  if (RecipeTags.length > 0){
+    for (var i = 0; i < RecipeTags.length; i++){
+      tags += (RecipeTags[i].charAt(0).toUpperCase() + RecipeTags[i].slice(1));
+      if (i != RecipeTags.length - 1){
+        tags += ", ";
+      } 
+    }
+  }
+
   //submit comment to database
   const handleSubmit = (e) => {
     console.log("Comment added: " + comment.current.value);
@@ -153,7 +183,7 @@ export default function Display(props) {
                   </Grid>
                   <Grid item xs={9}>
                     <div className="recipeInfo">
-                      <b>Tags:</b> {Recipe.tags}
+                      <b>Tags:</b> {tags}
                     </div>
                   </Grid>
                 </Grid>
@@ -178,9 +208,7 @@ export default function Display(props) {
               >
                 Post!
               </a>
-              <div>
-                {Confirmation /* confirms that comment was submitted */}
-              </div>
+              
             </Grid>
           </Grid>
           <ul>
