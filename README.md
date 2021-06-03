@@ -3,7 +3,7 @@
 Welcome to Well Plated! Our goal is to build a social network that allows users to share recipes with each other. 
 
 
-These are the steps to start up the project:
+These are the steps to start up the project after cloning:
 
 `cd api`
 
