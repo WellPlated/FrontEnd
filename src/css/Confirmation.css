@@ -1,13 +1,14 @@
 
- 
-.ConfirmationPage {
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.recipe-page {
     background-color: #f8cbcb;
     margin-left: 15%;
+    display: flex;
+    height: 100vh;
+    fill: #f8cbcb;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    background-color: #f8cbcb;
     padding-left: 40px;
     padding-right: 40px;
 }
