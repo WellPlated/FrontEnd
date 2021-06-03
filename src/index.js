@@ -29,7 +29,6 @@ ReactDOM.render(
         <Route path="/Display/:hash" component={Display} />
         <Route path="/About" component={AboutUs} />
         <Route path="/Confirmation" component={Confirmation} />
-        {/*<Route path="/recipees/:index" component={recipeDisplay}/>*/}
         <Route path="/" component={Home} />
       </Switch>
     </div>

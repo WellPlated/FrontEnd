@@ -34,7 +34,7 @@
     "prettier": "2.0.5"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"cd api && python -m flask run\"",
+    "start": "concurrently \"react-scripts start\" \"cd api && flask run\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
