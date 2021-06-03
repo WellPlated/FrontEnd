@@ -22,9 +22,9 @@ Once you have our project open, you can explore our different pages and upload r
 
 
 The Team:
-Kratik Agrawal
-Tanaya Nawathe
-Medha Kini
-Shounak Kuiry
-Abhigya Sodani
+Kratik Agrawal,
+Tanaya Nawathe,
+Medha Kini,
+Shounak Kuiry,
+Abhigya Sodani,
 Michael Simon
