@@ -107,13 +107,18 @@ function UploadForm({ Upload, error, onSubmit }) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="tags">Select All Tags that Apply: </label>
-                    <select multiple={true} name="tags" id="tags" 
+                    <select multiple={true} name="tags" id="tags" className="tagsBox"
                     onChange={handleChange} value={details.tags}>
-                        <option value="Chinese">Chinese</option>
-                        <option value="French">French</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="Italian">Italian</option>
                         <option value="American">American</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Thai">Thai</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Vietnamese">Vietnamese</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="French">French</option>
+                        <option value="Greek">Greek</option>
+                        <option value="Japanese">Japanese</option>
                         <option value="Vegetarian">Vegetarian</option>
                         <option value="Vegan">Vegan</option>
                         <option value="Keto">Keto</option>
@@ -123,6 +128,8 @@ function UploadForm({ Upload, error, onSubmit }) {
                         <option value="Breakfast">Breakfast</option>
                         <option value="Lunch">Lunch</option>
                         <option value="Dinner">Dinner</option>
+                        <option value="Low-Calorie">Low Calorie</option>
+                        <option value="High-Protein">High Protein</option>
                         <option value="Drinks">Drinks/Beverages</option>
                         
                     

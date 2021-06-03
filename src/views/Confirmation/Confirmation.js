@@ -1,11 +1,11 @@
-import "../../css/About.css";
+import "../../css/Confirmation.css";
 import Grid from "@material-ui/core/Grid";
 
 
 export default function Confirmation (){
     
     return (
-      <div className="AboutUsPage">
+      <div className="recipe-page">
         <div className="recipe-posted">
             <h4>Your Recipe has been posted!</h4>
             <div className="buttons">

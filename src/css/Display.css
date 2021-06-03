@@ -18,7 +18,7 @@
   padding-bottom: 10px;
 }
 .aboutHeader h2 {
-  color: #bc5a45;
+  color: #bc456d;
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
   font-style: italic;
@@ -36,12 +36,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   font-family: 'Courier New', Courier, monospace;
-  color:  #bc5a45;
+  color:  #bc4559;
   font-style: italic;
   font-weight: bold;
   
 }
-
 
 .display-content-background{
   background-color: #f8cbcb;
@@ -56,10 +55,12 @@
 }
 
 .submit-comment-button{
-  color:whitesmoke;
+  background-color: #f88181;
   font-size: 25px;
-  border: white;
-  border-width: 50px;
+  height: 20px;
+  width: 200px;
+  line-height: 3px; 
+  box-sizing: border-box; 
 }
 
 .display-content{
@@ -78,6 +79,32 @@
   justify-content: center;
 }
 .image{
-  width:550px;
-  height:550px;
+  max-width: 550px;
+  max-height: 550px;
+  width: auto;
+  height: auto;
+ 
+}
+
+ul {
+  list-style: none;
+  font-size: 20px;
+}
+ul li::before {
+  content: "";
+  background-image: url(https://static.thenounproject.com/png/638755-200.png);
+  background-size: contain;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  top: 0.1rem;
+  margin-right: 0.2rem;
+}
+
+ul li {
+  border: 3px solid rgb(253, 149, 149);
+  margin-top: 5px;
+  background-color:white;
+  color: #bc5a45
 }

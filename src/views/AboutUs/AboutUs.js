@@ -5,6 +5,7 @@ import "../../css/About.css";
 export default function AboutUs (){
     
     return (
+      
       <div className="AboutUsPage">
         <div >
           <div className="aboutHeader">
@@ -32,9 +33,8 @@ export default function AboutUs (){
 
               <p>The Team: Kratik Agrawal, Tanaya Nawathe, Medha Kini, Shounak Kuiry, Abhigya Sodani, and Michael Simon</p>
           </div>
-  
-
         </div>
       </div>
+      
     );
   }
