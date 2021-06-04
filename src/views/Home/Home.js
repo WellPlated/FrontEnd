@@ -8,11 +8,13 @@ import RecipeCards from "../Components/RecipeCards.js";
 import FilterBoxes from "../Components/FilterBoxes.js";
 
 export default function Home() {
+  //
   const [Recipes, setRecipes] = useState([]);
-  const [Liked, setLiked] = useState([]);
-  const [SearchTerms, setSearchTerms] = useState("");
-  const [PostSize, setPostSize] = useState();
 
+  //
+  const [Liked, setLiked] = useState([]);
+
+  // state
   const [Filters, setFilters] = useState([]);
 
   useEffect(() => {
