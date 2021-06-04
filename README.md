@@ -29,5 +29,9 @@ Shounak Kuiry,
 Abhigya Sodani,
 Michael Simon
 
+Notes:
+Backend Repo (merged with this repo but commits not visible): https://github.com/WellPlated/BackEnd
+Abhigya Sodani commited from two accounts abhigya-sodani and AbhigyaSodani
+
 ![group](https://user-images.githubusercontent.com/75349834/120722645-efa18800-c484-11eb-9a25-eb3dbb2adeec.jpg)
 (Our Team)
