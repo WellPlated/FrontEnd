@@ -17,6 +17,7 @@ import Confirmation from "./views/Confirmation/Confirmation"
 
 var hist = createBrowserHistory();
 
+// use react router to manage routing thoughout website, URLs
 ReactDOM.render(
   <Router history={hist} onUpdate={() => window.scrollTo(0, 0)}>
     <SideNav name="Test" />

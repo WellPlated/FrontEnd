@@ -8,20 +8,22 @@ import RecipeCards from "../Components/RecipeCards.js";
 import FilterBoxes from "../Components/FilterBoxes.js";
 
 export default function Home() {
-  //
+  // state variable to hold array of recipe objects
   const [Recipes, setRecipes] = useState([]);
 
-  //
+  // state variable to hold id's of all liked recipes
   const [Liked, setLiked] = useState([]);
 
-  // state
+  // state variable to hold array of checked filters
   const [Filters, setFilters] = useState([]);
 
+  // upon first render, call functions to get recipes and liked recipes
   useEffect(() => {
     getRecipes();
     retrieveLikes(localStorage.getItem("token"));
   }, []);
 
+  // gets recipes from backend
   const getRecipes = (variables) => {
     axios.post('http://127.0.0.1:5000/recipes/filter', variables)
             .then(function(response){
@@ -40,6 +42,7 @@ export default function Home() {
         });
   }
 
+  // function to pass down to filterboxes component to manage filters
   const handleFilters = (filters) => {
     const newFilters = {...Filters};
 
@@ -51,6 +54,7 @@ export default function Home() {
     setFilters(newFilters);
   }
 
+  // get array of id's of liked recipes
   const retrieveLikes = (token) => {
     console.log("Checking liked recipes");
     axios

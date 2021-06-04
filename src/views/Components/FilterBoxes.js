@@ -8,7 +8,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 // import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import '../../css/Home.css';
-import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// tags, cuisine names
 const tags = [
   "Vegetarian",
   "Vegan",
@@ -49,8 +49,10 @@ const cuisines = [
 
 export default function FilterBoxes(props) {
   const classes = useStyles();
+  // store which filters are checked in an array
   const [checked, setChecked] = useState([]);
 
+  // add/remove filter from array of checked boxes depending on if it's already there
   const handleToggle = (value) => {
     const currIndex = checked.indexOf(value); // currIndex = -1 if index not found
     const newChecked = [...checked];
@@ -61,6 +63,7 @@ export default function FilterBoxes(props) {
       newChecked.splice(currIndex, 1);
     }
     setChecked(newChecked);
+    // call handlefilters from props to updated checked filters in parent component
     props.handleFilters(newChecked);
   };
 
