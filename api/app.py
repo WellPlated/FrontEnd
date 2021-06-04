@@ -34,6 +34,7 @@ def user_helper(user) -> dict:
 def home():
     return "Well Plated Backend!"
 
+#get all recipes from the backend
 @app.route('/recipes/all', methods=['GET'])
 def api_all_orders():
     recipes = db.execute("SELECT * FROM recipes")
@@ -44,6 +45,7 @@ def api_all_orders():
     
     return jsonify(recipes)
 
+#fetch recipe via its hash
 @app.route('/recipes/fetch_recipe', methods=['GET'])
 def api_one_recipe():
     if request.method == 'GET':
@@ -53,6 +55,7 @@ def api_one_recipe():
         del(recipe[0]["user_id"])
     return jsonify(recipe)
 
+#sign a user up for the WellPlated app
 @app.route('/signup', methods=['POST'])
 def api_signup():
     if(request.method=='POST'):
@@ -95,6 +98,7 @@ def api_signup():
  
         return { "status" : 200, "token" : token }
 
+#log the user in
 @app.route('/login', methods=['GET', 'POST'])
 def api_login():
     if request.method == 'POST':
@@ -105,7 +109,7 @@ def api_login():
             token = tokenize(auth_user) # generate token
             if type(token) is bytes:
                 token=token[2:-1]
-            return {"status": 200, "access_token": str(token), "token_type": "bearer"}
+            return {"status": 200, "access_token": str(token), "token_type": "bearer"} #return token to the frontend
       else:
           print("auth:",auth_user)
           return {"status": 403, "message": "Wrong credentials!"}
@@ -119,7 +123,7 @@ def get_recipe():
 
         return {"status" : 200, "recipe" : recipe}
 
-
+#get all the recipes for a particular user from the database
 @app.route('/recipes/user', methods=['POST'])
 def user_recipes():
     data=request.json
@@ -199,14 +203,16 @@ def api_upload(): # ENDPOINT to post a recipe
 
         return {"status": 200 }
 
+#add a tag for a given recipe
 @app.route('/recipes/addtag', methods=['POST'])
 def api_addtag():
     if request.method == 'POST':
       data = request.json
       db.execute("INSERT INTO tags(recipe_id,tag) VALUES("+str(data['recipe_id'])+","+"'"+str(data['tag'])+"'"+")")
-      return {"status": 200, "message": "tag inserted"}
+      return {"status": 200, "message": "tag inserted"} #return 200 if succesfully inserted
 
 
+#get all tags for a given recipe, and return as a string list to the frontend
 @app.route('/recipes/gettags', methods=['GET'])
 def api_gettags():
     if request.method == 'GET':
@@ -219,6 +225,7 @@ def api_gettags():
       return_dict={"status":200,"tags":tags}
       return jsonify(return_dict)
 
+#get adaptive images for our recipes using the unsplash api
 @app.route('/getImage', methods=['GET'])
 def get_image():
     if request.method == 'GET':
@@ -228,10 +235,12 @@ def get_image():
         print("link: ", link)
         f = urllib.request.urlopen(link)
         myfile = f.read()
+        #parse the return json to get url to the topmost image in the search
         a = str(myfile).split('"raw":')
         b = a[1].split(",")
         return jsonify({ "url": b[0][1:-1]})
 
+#pass back a list of filters and return all recipes that contain at least one of the tags
 @app.route('/recipes/filter', methods=['POST'])
 def api_getfilter():
     if request.method == 'POST':
@@ -252,12 +261,14 @@ def api_getfilter():
                 if(j['recipe_id'] not in tempArray):
                     tempArray.append(j['recipe_id'])
         return_list=[]
+        #iterate through the recipe ids and return recipe objects for all relevant recipes to the frontend
         for k in range(0,len(tempArray)):
             return_list.append(db.execute("SELECT * FROM recipes WHERE id="+str(tempArray[k])+"")[0])
     # return_list.append({"status",200})
     print(return_list)
     return jsonify(return_list)
 
+#delete a recipe from the database
 @app.route('/delete', methods=['POST'])
 def delete_recipe():
     if request.method == 'POST':
@@ -268,6 +279,7 @@ def delete_recipe():
         db.execute("DELETE FROM tags WHERE recipe_id=" + str(recipe_id)) # delete the tags
         return {'status' : 'test'}
 
+#add a comment for a recipe to the comment database
 @app.route('/comment', methods=['POST'])
 def comment_on_recipe():
     if request.method == 'POST':
@@ -279,7 +291,7 @@ def comment_on_recipe():
         db.execute("INSERT INTO comments(comment, recipe_hash) VALUES(:comment, :hashnum)", comment=comment, hashnum=hashnum)
         return {'status' : 'success'}
 
-
+#get all the comments for a particular recipe
 @app.route('/getcomments', methods=['POST'])
 def get_comments():
     if request.method == 'POST':
@@ -295,6 +307,7 @@ def get_comments():
         except:
             return {'status' : '403'}
 
+#helper function that helps JWT tokenize a users data
 def tokenize(user_data: dict) -> str: # helper function to generate token
     return jwt.encode(
         {
@@ -306,6 +319,7 @@ def tokenize(user_data: dict) -> str: # helper function to generate token
         SECRET_KEY,
         algorithm="HS256")
 
+#add a users like to the likes database
 @app.route('/like', methods=['POST']) 
 def like_recipe():
     if request.method == 'POST':
@@ -320,6 +334,7 @@ def like_recipe():
         db.execute("INSERT INTO liked(user_id, post_id) VALUES(:user_id, :post_id)", user_id=user_id, post_id=recipe_id)
         return {'status' : 'success'}
 
+#delete a like entry from the likes database
 @app.route('/unlike', methods=['POST']) 
 def unlike_recipe():
     if request.method == 'POST':
@@ -334,6 +349,7 @@ def unlike_recipe():
         db.execute("DELETE FROM liked WHERE post_id="+str(recipe_id)+" AND user_id="+str(user_id))
         return {'status' : 'success'}
 
+#get all the recipes a given user has liked and return to the frontend in a json object
 @app.route('/getLikes', methods=['POST']) 
 def recipe_getLikes():
     if request.method == 'POST':
@@ -357,6 +373,7 @@ def recipe_getLikes():
         print(final_return)
         return jsonify(final_return)
 
+#authenicate user via password hashing
 def authenticate_user(username: str, password: str) -> dict: # helper function to check user's credentials
     existing_user = db.execute("SELECT * FROM users WHERE username="+"'"+username+"'")
     print(existing_user)
