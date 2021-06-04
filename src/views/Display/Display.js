@@ -6,15 +6,27 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Display(props) {
+  //Retrieve hash from URL
   const hash = window.location.pathname.slice(-6);
+
+  //Setup comments
   const [Comments, setComments] = useState([]);
+
+  //Setup unique image URL
   const [imageURL, setImageURL] = useState("");
+
+  //Confirmation message
   const [Confirmation, setConfirmation] = useState("");
+
   //If query exists, we can use that info, otherwise leave it for the getter function
   const [Recipe, setRecipe] = useState(
     props.location.query ? JSON.parse(props.location.query.info) : undefined
   );
+
+  //Setup tags
   const [RecipeTags, setRecipeTags] = useState([]);
+
+  //Get unique image through API call
   const getImage = (name) => {
     const food = encodeURIComponent(name);
     axios
@@ -27,24 +39,6 @@ export default function Display(props) {
         console.log(error);
       });
   };
-
-  const getTags = (id) => {
-    const identifier = encodeURIComponent(id);
-    axios
-      .get("http://127.0.0.1:5000/recipes/gettags?recipe_id=" + identifier)
-      .then((response) => {
-        if (response["data"]["status"] === 200) {
-          // console.log("tags: ");
-          setRecipeTags(response.data.tags);
-        } else if (response["data"]["status"] === 403) {
-          alert("Failed to fetch tags data");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        //Perform action based on error
-      });
-  }
 
   useEffect(async () => {
     // fetch comments
@@ -64,6 +58,8 @@ export default function Display(props) {
           console.log(error);
         });
     }
+
+    //fetch tags
     const getTags = (id) => {
     const identifier = encodeURIComponent(id);
     axios
@@ -107,6 +103,7 @@ export default function Display(props) {
       getRecipe();
     }
 
+    //Once recipe is loaded, retrieve its comments
     if (Recipe) {
       getComments();
     }
@@ -115,7 +112,7 @@ export default function Display(props) {
   const comment = React.useRef(null);
   let tags = [];
 
-  //Capitalize and separate tags with commas
+  //Capitalize and separate tags with commas (formatting)
   if (RecipeTags.length > 0){
     for (var i = 0; i < RecipeTags.length; i++){
       tags += (RecipeTags[i].charAt(0).toUpperCase() + RecipeTags[i].slice(1));
@@ -125,7 +122,6 @@ export default function Display(props) {
     }
   }
 
-  console.log(tags);
   //submit comment to database
   const handleSubmit = (e) => {
     console.log("Comment added: " + comment.current.value);
@@ -149,7 +145,8 @@ export default function Display(props) {
   if (Recipe === undefined) {
     return <div className="display-header">No such recipe found!</div>;
   }
-  console.log(RecipeTags)
+  
+  //Main display
   return (
     <div className="display-main">
       <header className="display-header">
